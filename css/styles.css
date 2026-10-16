@@ -1589,5 +1589,238 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
   }
 }
 
+/* ============================================================
+   LEFT DIAMOND TIMELINE SIDEBAR NAVIGATOR
+   ============================================================ */
+#timeline-sidebar {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-sidebar-panel {
+  position: relative;
+  background: rgba(9, 7, 16, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 140, 0, 0.22);
+  border-radius: 1.25rem;
+  padding: 1rem 0.95rem 1rem 0.85rem;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 100, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-sidebar-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 180, 50, 0.4), transparent);
+  pointer-events: none;
+}
+
+.timeline-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+  padding-left: 0.35rem;
+}
+
+.timeline-spine-track {
+  position: absolute;
+  left: 22px;
+  top: 42px;
+  bottom: 22px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.timeline-spine-fill {
+  position: absolute;
+  left: 22px;
+  top: 42px;
+  width: 2px;
+  height: 0px;
+  background: linear-gradient(180deg, #ffaa00, #ff5500);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.85);
+  border-radius: 9999px;
+  pointer-events: none;
+  transition: height 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 2;
+}
+
+.timeline-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+  z-index: 3;
+}
+
+.timeline-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  padding: 0.25rem 0.35rem 0.25rem 0.15rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+}
+
+.timeline-diamond-box {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timeline-diamond {
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  background: rgba(18, 14, 28, 0.95);
+  border: 1.5px solid rgba(255, 140, 0, 0.38);
+  border-radius: 1.5px;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  display: block;
+}
+
+.timeline-diamond-halo {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  transform: rotate(45deg);
+  border: 1px dashed rgba(255, 140, 0, 0.4);
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.timeline-nav-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
+  width: 14px;
+}
+
+.timeline-nav-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.52);
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover States */
+.timeline-nav-item:hover .timeline-diamond {
+  background: rgba(255, 140, 0, 0.3);
+  border-color: #ff9900;
+  transform: rotate(45deg) scale(1.22);
+  box-shadow: 0 0 10px rgba(255, 150, 0, 0.7);
+}
+
+.timeline-nav-item:hover .timeline-nav-label {
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.timeline-nav-item:hover .timeline-nav-num {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Active State */
+.timeline-nav-item.active .timeline-diamond {
+  background: linear-gradient(135deg, #ffaa00, #ff5500);
+  border-color: #ffe680;
+  transform: rotate(45deg) scale(1.35);
+  box-shadow: 0 0 14px rgba(255, 140, 0, 0.95), 0 0 25px rgba(255, 90, 0, 0.55);
+}
+
+.timeline-nav-item.active .timeline-diamond-halo {
+  opacity: 1;
+  animation: diamondSpinPulse 4s linear infinite;
+}
+
+.timeline-nav-item.active .timeline-nav-label {
+  color: #ffb84d;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(255, 140, 0, 0.45);
+  transform: translateX(3px);
+}
+
+.timeline-nav-item.active .timeline-nav-num {
+  color: #ff9900;
+  font-weight: 600;
+  opacity: 1;
+}
+
+@keyframes diamondSpinPulse {
+  0% {
+    transform: rotate(45deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(225deg) scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotate(405deg) scale(1);
+    opacity: 0.7;
+  }
+}
+
+
+
+/* User Toggle Collapsed State */
+#timeline-sidebar.collapsed .timeline-nav-label,
+#timeline-sidebar.collapsed .timeline-nav-num,
+#timeline-sidebar.collapsed .timeline-sidebar-header span {
+  display: none;
+}
+
+#timeline-sidebar.collapsed .timeline-sidebar-panel {
+  padding: 0.75rem 0.5rem;
+  border-radius: 9999px;
+}
+
+#timeline-sidebar.collapsed .timeline-sidebar-header svg {
+  transform: rotate(180deg);
+}
+
+#timeline-sidebar.collapsed .timeline-nav-item:hover .timeline-nav-label,
+#timeline-sidebar.collapsed .timeline-nav-item.active .timeline-nav-label {
+  display: block;
+  position: absolute;
+  left: 28px;
+  background: rgba(14, 10, 22, 0.95);
+  border: 1px solid rgba(255, 140, 0, 0.4);
+  color: #ffb84d;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.45rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 12px rgba(255, 120, 0, 0.2);
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Ensure clean margin on medium/large desktop viewports so sidebar doesn't overlap text */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  #hero, #story, #skills, #stack, #ideas, #top10, #archive, #contact {
+    padding-left: clamp(4rem, 10vw, 7.5rem) !important;
+  }
+}
+
 
 

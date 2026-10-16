@@ -1231,6 +1231,143 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
     delay: 0.7
   });
 
+  // ==========================================
+  // Left Diamond Timeline Sidebar Navigation
+  // ==========================================
+  const timelineSidebar = document.getElementById('timeline-sidebar');
+  if (timelineSidebar) {
+    const navItems = Array.from(timelineSidebar.querySelectorAll('.timeline-nav-item'));
+    const spineTrack = timelineSidebar.querySelector('.timeline-spine-track');
+    const spineProgress = document.getElementById('timeline-spine-progress');
+
+    const trackedSections = navItems.map(item => {
+      const sectionId = item.dataset.section;
+      return {
+        id: sectionId,
+        item: item,
+        el: document.getElementById(sectionId)
+      };
+    }).filter(s => s.el !== null);
+
+    function updateSpinePositions(activeIndex) {
+      if (!navItems.length) return;
+      const firstDiamond = navItems[0].querySelector('.timeline-diamond-box');
+      const lastDiamond = navItems[navItems.length - 1].querySelector('.timeline-diamond-box');
+      const panel = timelineSidebar.querySelector('.timeline-sidebar-panel');
+      if (!firstDiamond || !lastDiamond || !panel) return;
+
+      const panelRect = panel.getBoundingClientRect();
+      const firstRect = firstDiamond.getBoundingClientRect();
+      const lastRect = lastDiamond.getBoundingClientRect();
+
+      const topOffset = (firstRect.top + firstRect.height / 2) - panelRect.top;
+      const totalTrackHeight = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
+
+      if (spineTrack) {
+        spineTrack.style.top = `${topOffset}px`;
+        spineTrack.style.height = `${Math.max(0, totalTrackHeight)}px`;
+        spineTrack.style.bottom = 'auto';
+      }
+
+      if (spineProgress) {
+        const safeActiveIdx = Math.max(0, Math.min(activeIndex, navItems.length - 1));
+        const activeDiamond = navItems[safeActiveIdx].querySelector('.timeline-diamond-box');
+        if (activeDiamond) {
+          const activeRect = activeDiamond.getBoundingClientRect();
+          const progressHeight = Math.max(0, (activeRect.top + activeRect.height / 2) - (firstRect.top + firstRect.height / 2));
+          spineProgress.style.top = `${topOffset}px`;
+          spineProgress.style.height = `${progressHeight}px`;
+        }
+      }
+    }
+
+    function setActiveTimelineItem(sectionId) {
+      let activeIndex = 0;
+      navItems.forEach((item, idx) => {
+        if (item.dataset.section === sectionId) {
+          item.classList.add('active');
+          activeIndex = idx;
+        } else {
+          item.classList.remove('active');
+        }
+      });
+      updateSpinePositions(activeIndex);
+    }
+
+    // Click handler for smooth scrolling
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = item.dataset.section;
+        const targetEl = document.getElementById(sectionId);
+        if (targetEl) {
+          const navbarHeight = 70;
+          const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+          window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+          });
+          if (history.pushState) {
+            history.pushState(null, null, `#${sectionId}`);
+          }
+          setActiveTimelineItem(sectionId);
+        }
+      });
+    });
+
+    // Scroll listener to update active section
+    function onScrollSpy() {
+      const scrollPos = window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (scrollPos + windowHeight >= docHeight - 50 && trackedSections.length > 0) {
+        setActiveTimelineItem(trackedSections[trackedSections.length - 1].id);
+        return;
+      }
+
+      let currentSectionId = trackedSections[0]?.id || 'hero';
+      for (let i = 0; i < trackedSections.length; i++) {
+        const rect = trackedSections[i].el.getBoundingClientRect();
+        if (rect.top <= windowHeight * 0.45 && rect.bottom >= windowHeight * 0.15) {
+          currentSectionId = trackedSections[i].id;
+        }
+      }
+
+      setActiveTimelineItem(currentSectionId);
+    }
+
+    let isScrollTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!isScrollTicking) {
+        window.requestAnimationFrame(() => {
+          onScrollSpy();
+          isScrollTicking = false;
+        });
+        isScrollTicking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      onScrollSpy();
+    });
+
+    const toggleBtn = document.getElementById('timeline-toggle-btn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        timelineSidebar.classList.toggle('collapsed');
+        const activeIdx = navItems.findIndex(item => item.classList.contains('active'));
+        updateSpinePositions(activeIdx >= 0 ? activeIdx : 0);
+      });
+    }
+
+    // Initialize
+    setTimeout(() => {
+      onScrollSpy();
+    }, 150);
+  }
+
   // Helper icon function
   function getIcon(tags) {
     if (tags.includes('Privacy')) return '🛡️';
