@@ -662,7 +662,139 @@ const RESUME_JOURNEY = [
   }
 ];
 
-
+const CORE_SKILLS = [
+  {
+    id: "ai-ml",
+    category: "ai",
+    group: "Artificial Intelligence & Machine Learning",
+    icon: "🧠",
+    accent: "#ff9900",
+    description: "Deep learning models, agentic reasoning protocols, LLM orchestration, and federated learning pipelines.",
+    skills: [
+      "AI Engineering", "Machine Learning", "Deep Learning", "Natural Language Processing (NLP)", 
+      "Computer Vision", "Generative AI", "Large Language Models (LLMs)", "RAG Systems", 
+      "AI Agents", "Prompt Engineering", "Model Evaluation", "Federated Learning"
+    ]
+  },
+  {
+    id: "languages",
+    category: "languages",
+    group: "Programming Languages",
+    icon: "💻",
+    accent: "#38bdf8",
+    description: "Multi-paradigm languages for systems engineering, asynchronous services, and modern frontends.",
+    skills: [
+      "Python", "Java", "JavaScript", "C", "C++", "Bash", "HTML5", "CSS3"
+    ]
+  },
+  {
+    id: "software-dev",
+    category: "software",
+    group: "Software Development",
+    icon: "🏗️",
+    accent: "#a855f7",
+    description: "End-to-end full-stack architectures, modular microservices, REST APIs, and database engineering.",
+    skills: [
+      "Full-Stack Development", "Backend Engineering", "REST API Development", 
+      "Desktop Application Development", "Cross-Platform Development", "Database Design", 
+      "Application Architecture", "Modular Software Design"
+    ]
+  },
+  {
+    id: "ai-tools",
+    category: "ai",
+    group: "AI & Data Science Tools",
+    icon: "📊",
+    accent: "#f59e0b",
+    description: "State-of-the-art frameworks for numerical modeling, hyperparameter optimization, and neural research.",
+    skills: [
+      "TensorFlow", "OpenCV", "scikit-learn", "Hugging Face", "Optuna", "Google Colab", "NumPy", "Pandas"
+    ]
+  },
+  {
+    id: "frameworks",
+    category: "software",
+    group: "Frameworks & Technologies",
+    icon: "⚡",
+    accent: "#10b981",
+    description: "Production web runtimes, async micro-frameworks, edge databases, and Git-centric workflows.",
+    skills: [
+      "Node.js", "FastAPI", "Flask", "Flutter", "Firebase", "SQLite", "Git", "GitHub", "VS Code"
+    ]
+  },
+  {
+    id: "automation",
+    category: "automation",
+    group: "Automation & AI Integration",
+    icon: "🤖",
+    accent: "#ec4899",
+    description: "Autonomous agent execution chains, multimodal voice synthesis, and end-to-end automated pipelines.",
+    skills: [
+      "Workflow Automation", "AI-Powered Applications", "LLM Integration", "API Integration", 
+      "Agentic Workflows", "Data Pipelines", "Automated Video Generation", "Text-to-Speech", "Speech Recognition"
+    ]
+  },
+  {
+    id: "cv-multimedia",
+    category: "multimedia",
+    group: "Computer Vision & Multimedia",
+    icon: "👁️",
+    accent: "#6366f1",
+    description: "Pixel-level image filters, spatial intelligence telemetry, audio transcription, and programmatic media editing.",
+    skills: [
+      "Image Processing", "Video Processing", "Spatial Intelligence", "3D Reconstruction Concepts", 
+      "FFmpeg", "MoviePy", "WhisperX", "Coqui TTS", "OpenCV"
+    ]
+  },
+  {
+    id: "systems-opt",
+    category: "systems",
+    group: "Systems Engineering & Optimization",
+    icon: "⚙️",
+    accent: "#ef4444",
+    description: "High-concurrency profiling, memory footprint reduction, algorithm benchmarking, and zero-trust security.",
+    skills: [
+      "System Architecture", "Computational Efficiency", "Performance Optimization", 
+      "Memory Optimization", "Algorithm Design", "Benchmarking", "Debugging", "Automated Testing", "Security-Aware Development"
+    ]
+  },
+  {
+    id: "research",
+    category: "research",
+    group: "Research & Analytical Skills",
+    icon: "🔬",
+    accent: "#06b6d4",
+    description: "Rigorous empirical experimentation, statistical hypothesis verification, and benchmark documentation.",
+    skills: [
+      "Technical Research", "Experimental Design", "Hypothesis Testing", "Statistical Analysis", 
+      "Model Benchmarking", "Root-Cause Analysis", "Technical Documentation", "Evidence-Based Evaluation"
+    ]
+  },
+  {
+    id: "finance-quant",
+    category: "finance",
+    group: "Financial & Quantitative Analysis",
+    icon: "📈",
+    accent: "#eab308",
+    description: "Dual-degree quantitative financial valuation, stochastic simulations, M&A screening, and CAPM modeling.",
+    skills: [
+      "Financial Statement Analysis", "DCF Valuation", "Comparable Company Analysis", 
+      "Monte Carlo Simulation", "Scenario Analysis", "CAPM", "Portfolio Analysis", "Financial Modeling"
+    ]
+  },
+  {
+    id: "product-dev",
+    category: "product",
+    group: "Product Development",
+    icon: "🚀",
+    accent: "#f97316",
+    description: "From napkin sketch to production MVP: user-centric prototyping, AI pair-programming, and technical leadership.",
+    skills: [
+      "Product Ideation", "Technical Specification", "AI-Assisted Development", "Prototyping", 
+      "Workflow Design", "Problem Solving", "Cross-Disciplinary Research", "Technical Communication"
+    ]
+  }
+];
 
 const MASTER_IDEAS = [
   {

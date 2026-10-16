@@ -59,6 +59,7 @@
       </a>
       <div class="hidden md:flex items-center gap-7 text-sm font-medium text-white/70">
         <a href="#story" class="hover:text-amber-300 transition">Story</a>
+        <a href="#skills" class="hover:text-amber-300 transition">Skills</a>
         <a href="#stack" class="hover:text-amber-300 transition">Tech Orbit</a>
         <a href="#ideas" class="hover:text-amber-300 transition flex items-center gap-1.5 text-amber-200 font-semibold"><span class="text-amber-400">✦</span> 53 Ideas</a>
         <a href="#top10" class="hover:text-amber-300 transition">Top Projects</a>
@@ -108,7 +109,10 @@
         <a href="#story" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
           <span>📖</span> Story
         </a>
-        <a href="#stack" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
+        <a href="#skills" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
+          <span>⚡</span> Skills
+        </a>
+        <a href="#stack" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition col-span-2">
           <span>🪐</span> Tech Orbit
         </a>
         <a href="#ideas" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 to-orange-500/15 border border-amber-500/30 text-amber-200 font-semibold hover:text-white transition col-span-2">
@@ -254,6 +258,77 @@
           <!-- Rendered dynamically by JS from RESUME_JOURNEY -->
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ========== CORE SKILLS & TECHNICAL ARSENAL ========== -->
+  <section id="skills" class="py-28 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-14 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          Comprehensive Technical Arsenal · 11 Disciplines · 97+ Competencies
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          Core <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">Skills &amp; Mastery</span>
+        </h2>
+        <p class="text-white/60 text-base sm:text-lg leading-relaxed">
+          From training deep neural networks and architecting autonomous agent pipelines to corporate valuation, quantitative financial strategy, and cross-platform systems engineering.
+        </p>
+
+        <!-- Metrics Highlights Bar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
+          <div class="px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 backdrop-blur-sm">
+            <div class="font-display text-2xl font-bold text-amber-300">11</div>
+            <div class="text-xs text-white/50 uppercase tracking-wider mt-0.5">Core Disciplines</div>
+          </div>
+          <div class="px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 backdrop-blur-sm">
+            <div class="font-display text-2xl font-bold text-orange-400">97+</div>
+            <div class="text-xs text-white/50 uppercase tracking-wider mt-0.5">Competencies</div>
+          </div>
+          <div class="px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 backdrop-blur-sm">
+            <div class="font-display text-2xl font-bold text-cyan-300">Dual Depth</div>
+            <div class="text-xs text-white/50 uppercase tracking-wider mt-0.5">CSE + Finance &amp; Analytics</div>
+          </div>
+          <div class="px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 backdrop-blur-sm">
+            <div class="font-display text-2xl font-bold text-emerald-400">100%</div>
+            <div class="text-xs text-white/50 uppercase tracking-wider mt-0.5">Production Tested</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Search & Cluster Filters -->
+      <div class="max-w-3xl mx-auto mb-12">
+        <!-- Interactive Search Input -->
+        <div class="relative mb-5">
+          <svg class="w-4 h-4 text-amber-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" id="skills-search-input" placeholder="Search across all 97+ skills (e.g. Python, RAG, DCF, FastAPI, PyTorch, WhisperX)..."
+                 class="w-full pl-11 pr-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-white/40 text-sm focus:outline-none focus:border-amber-400/60 focus:bg-white/[0.07] transition shadow-lg shadow-black/20" />
+        </div>
+
+        <!-- Category Clusters Filter Buttons -->
+        <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 max-w-full scrollbar-none no-scrollbar" id="skills-cluster-filters">
+          <button class="skill-filter-btn active shrink-0" data-filter="all">All Domains (11)</button>
+          <button class="skill-filter-btn shrink-0" data-filter="ai">🧠 AI &amp; ML</button>
+          <button class="skill-filter-btn shrink-0" data-filter="languages">💻 Languages</button>
+          <button class="skill-filter-btn shrink-0" data-filter="software">🏗️ Software</button>
+          <button class="skill-filter-btn shrink-0" data-filter="systems">⚙️ Systems</button>
+          <button class="skill-filter-btn shrink-0" data-filter="finance">📈 Finance &amp; Quant</button>
+          <button class="skill-filter-btn shrink-0" data-filter="automation">🤖 Automation</button>
+          <button class="skill-filter-btn shrink-0" data-filter="multimedia">👁️ Vision</button>
+          <button class="skill-filter-btn shrink-0" data-filter="product">🚀 Product</button>
+        </div>
+      </div>
+
+      <!-- Core Skills Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="core-skills-grid">
+        <!-- Rendered dynamically by JS from CORE_SKILLS -->
+      </div>
+
     </div>
   </section>
 

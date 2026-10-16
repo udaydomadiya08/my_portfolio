@@ -763,6 +763,102 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ========== RENDER CORE SKILLS ARSENAL ==========
+  const skillsGrid = document.getElementById('core-skills-grid');
+  const skillsSearch = document.getElementById('skills-search-input');
+  const skillFilterBtns = document.querySelectorAll('.skill-filter-btn');
+
+  if (skillsGrid && typeof CORE_SKILLS !== 'undefined') {
+    function renderSkillsCards(filter = 'all', query = '') {
+      skillsGrid.innerHTML = '';
+      const cleanQuery = (query || '').trim().toLowerCase();
+
+      CORE_SKILLS.forEach(domain => {
+        // Filter by cluster
+        const matchesFilter = (filter === 'all' || domain.category === filter || domain.id === filter);
+        
+        // Filter by search query
+        const matchingSkills = domain.skills.filter(s => s.toLowerCase().includes(cleanQuery));
+        const matchesDomain = domain.group.toLowerCase().includes(cleanQuery) || domain.description.toLowerCase().includes(cleanQuery);
+        const matchesSearch = !cleanQuery || matchesDomain || matchingSkills.length > 0;
+
+        if (!matchesFilter || !matchesSearch) return;
+
+        const card = document.createElement('div');
+        card.className = 'skill-domain-card group';
+        card.dataset.category = domain.category;
+        card.dataset.id = domain.id;
+
+        card.innerHTML = `
+          <div class="skill-domain-card-glow" style="background: ${domain.accent};"></div>
+
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl border shadow-sm shrink-0"
+                   style="background: ${domain.accent}15; border-color: ${domain.accent}35; color: ${domain.accent};">
+                ${domain.icon}
+              </div>
+              <div>
+                <h3 class="font-display text-lg font-bold text-white group-hover:text-amber-200 transition-colors leading-snug">
+                  ${domain.group}
+                </h3>
+                <span class="text-[11px] font-mono text-white/40 block mt-0.5">
+                  ${domain.skills.length} core competencies
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-white/60 leading-relaxed mb-4">
+            ${domain.description}
+          </p>
+
+          <!-- Skill Badges Container -->
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-white/5 mt-auto">
+            ${domain.skills.map(skill => {
+              const isMatch = cleanQuery && skill.toLowerCase().includes(cleanQuery);
+              return `<span class="skill-item-pill ${isMatch ? 'highlight' : ''}" title="${skill}">${skill}</span>`;
+            }).join('')}
+          </div>
+        `;
+
+        skillsGrid.appendChild(card);
+      });
+
+      if (skillsGrid.children.length === 0) {
+        skillsGrid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-white/50 text-sm">
+            <p class="text-2xl mb-2">🔍</p>
+            No skills matched your search. Try "Python", "RAG", "FastAPI", or "Valuation".
+          </div>
+        `;
+      }
+    }
+
+    // Initial render
+    renderSkillsCards();
+
+    // Search input event
+    if (skillsSearch) {
+      skillsSearch.addEventListener('input', () => {
+        const activeBtn = document.querySelector('.skill-filter-btn.active');
+        const activeFilter = activeBtn ? activeBtn.dataset.filter : 'all';
+        renderSkillsCards(activeFilter, skillsSearch.value);
+      });
+    }
+
+    // Cluster filter buttons event
+    skillFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        skillFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        renderSkillsCards(filter, skillsSearch ? skillsSearch.value : '');
+      });
+    });
+  }
+
   // ========== 1. SINGULARITY TERMINAL (HUD / CLI) ==========
   const terminalModal = document.getElementById('terminal-modal');
   const terminalCloseBtn = document.getElementById('terminal-close-btn');
@@ -959,14 +1055,13 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
 
       case 'skills':
-        printOutput(`
-<span class="text-amber-400 font-bold">ORBITAL CAPABILITIES:</span>
-[AI &amp; Models]    PyTorch, LLM Orchestration, RAG, Ollama, Gemini Flash
-[Agent Systems]  agent.md, TRUST.md, Multi-Agent Tool Coordination
-[Valuation &amp; Fin] M&amp;A Screening, SEC EDGAR/XBRL Extraction, Quantitative Modeling
-[Privacy &amp; Sec]   privorai, Zero-Egress On-Device Interception, Federated Learning
-[Platforms]      Python (AsyncIO / FastAPI), Kotlin (Android Native), ONNX
-[Frontend]       TypeScript, Three.js 3D Scrollytelling, GSAP, TailwindCSS`);
+        let skillsOut = '<span class="text-amber-400 font-bold">CORE TECHNICAL ARSENAL (11 DISCIPLINES · 97+ COMPETENCIES):</span><br><br>';
+        if (typeof CORE_SKILLS !== 'undefined') {
+          CORE_SKILLS.forEach(d => {
+            skillsOut += `<span class="text-orange-400 font-semibold">${d.icon} ${d.group}:</span><br><span class="text-white/80">${d.skills.join(', ')}</span><br><br>`;
+          });
+        }
+        printOutput(skillsOut);
         break;
 
       case 'projects':

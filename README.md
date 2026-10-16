@@ -18,6 +18,43 @@ Live on Vercel & GitHub: [https://github.com/udaydomadiya08/my_portfolio](https:
 
 ---
 
+## 🛠️ Core Skills
+
+### 🧠 Artificial Intelligence & Machine Learning
+AI Engineering, Machine Learning, Deep Learning, Natural Language Processing (NLP), Computer Vision, Generative AI, Large Language Models (LLMs), RAG Systems, AI Agents, Prompt Engineering, Model Evaluation, Federated Learning.
+
+### 💻 Programming Languages
+Python, Java, JavaScript, C, C++, Bash, HTML5, CSS3.
+
+### 🏗️ Software Development
+Full-Stack Development, Backend Engineering, REST API Development, Desktop Application Development, Cross-Platform Development, Database Design, Application Architecture, Modular Software Design.
+
+### 📊 AI & Data Science Tools
+TensorFlow, OpenCV, scikit-learn, Hugging Face, Optuna, Google Colab, NumPy, Pandas.
+
+### ⚡ Frameworks & Technologies
+Node.js, FastAPI, Flask, Flutter, Firebase, SQLite, Git, GitHub, VS Code.
+
+### 🤖 Automation & AI Integration
+Workflow Automation, AI-Powered Applications, LLM Integration, API Integration, Agentic Workflows, Data Pipelines, Automated Video Generation, Text-to-Speech, Speech Recognition.
+
+### 👁️ Computer Vision & Multimedia
+Image Processing, Video Processing, Spatial Intelligence, 3D Reconstruction Concepts, FFmpeg, MoviePy, WhisperX, Coqui TTS, OpenCV.
+
+### ⚙️ Systems Engineering & Optimization
+System Architecture, Computational Efficiency, Performance Optimization, Memory Optimization, Algorithm Design, Benchmarking, Debugging, Automated Testing, Security-Aware Development.
+
+### 🔬 Research & Analytical Skills
+Technical Research, Experimental Design, Hypothesis Testing, Statistical Analysis, Model Benchmarking, Root-Cause Analysis, Technical Documentation, Evidence-Based Evaluation.
+
+### 📈 Financial & Quantitative Analysis
+Financial Statement Analysis, DCF Valuation, Comparable Company Analysis, Monte Carlo Simulation, Scenario Analysis, CAPM, Portfolio Analysis, Financial Modeling.
+
+### 🚀 Product Development
+Product Ideation, Technical Specification, AI-Assisted Development, Prototyping, Workflow Design, Problem Solving, Cross-Disciplinary Research, Technical Communication.
+
+---
+
 ## 🚀 Running Locally
 
 ```bash
