@@ -808,7 +808,7 @@ const MASTER_IDEAS = [
     "description": "Develop an AI architecture that improves computational efficiency through adaptive routing, reusable representations, inexpensive probes, and selective execution. The goal is to obtain more useful output from less computation, memory, energy, and latency.",
     "potential": "Targets the core cost and energy constraints of increasingly capable AI systems. Maximizes inference efficiency against strong state-of-the-art baselines.",
     "cluster": "Core Breakthroughs",
-    "x": 320,
+    "x": 261,
     "y": 100,
     "magnitude": 10,
     "color": "#fbbf24"
@@ -824,7 +824,7 @@ const MASTER_IDEAS = [
     "description": "A text-first social platform designed around meaningful contributions rather than addiction, vanity metrics, endless scrolling, and personal-image competition. AI helps identify low-value or non-contributing posts while supporting constructive discussion.",
     "potential": "A revolutionary human-centered model for online communities, healthier digital interaction, and attention-respecting technology.",
     "cluster": "Core Breakthroughs",
-    "x": 220,
+    "x": 161,
     "y": 150,
     "magnitude": 9,
     "color": "#fbbf24"
@@ -840,7 +840,7 @@ const MASTER_IDEAS = [
     "description": "An intelligent computational routing system that directs tasks to the most suitable execution path or hardware resource, balancing accuracy, energy consumption, memory, latency, and computational cost.",
     "potential": "Faster, cheaper computation across AI inference, scientific workloads, and mixed hardware environments.",
     "cluster": "Core Breakthroughs",
-    "x": 380,
+    "x": 321,
     "y": 170,
     "magnitude": 9,
     "color": "#fbbf24"
@@ -856,7 +856,7 @@ const MASTER_IDEAS = [
     "description": "A compact, earbud-like hearing-enhancement device that amplifies and processes useful speech directly in the ear, without a phone intermediary or the conventional behind-the-ear appearance. Emphasizes affordability, comfort, and discreet industrial design.",
     "potential": "More accessible hearing assistance via direct on-device acoustic filtering, breaking stigma and cost barriers.",
     "cluster": "Core Breakthroughs",
-    "x": 160,
+    "x": 101,
     "y": 220,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -872,7 +872,7 @@ const MASTER_IDEAS = [
     "description": "Analyze two phone recordings of the same indoor space, construct a shared spatial representation, identify objects or regions that were added, removed, or moved, and explain the differences in natural language.",
     "potential": "Robotics, indoor 3D mapping, property inspection, automated inventory tracking, and ambient spatial understanding.",
     "cluster": "Core Breakthroughs",
-    "x": 270,
+    "x": 211,
     "y": 250,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -888,7 +888,7 @@ const MASTER_IDEAS = [
     "description": "An AI-based protection concept that seeks to identify warning signs and potential risks before they become serious incidents, rather than responding only after harm occurs. Incorporates proactive risk detection and intervention.",
     "potential": "Next-generation digital safety, proactive threat detection, and preventive assistance with privacy-first on-device execution.",
     "cluster": "Core Breakthroughs",
-    "x": 350,
+    "x": 291,
     "y": 260,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -904,7 +904,7 @@ const MASTER_IDEAS = [
     "description": "Investigate whether machine learning can infer useful information about human mental states from neural signals, behavioral patterns, facial muscle activity, or other observable signals, researching datasets and limits of indirect thought inference.",
     "potential": "Breakthrough assistive communication and neuroscience research for motor-impaired individuals.",
     "cluster": "Core Breakthroughs",
-    "x": 440,
+    "x": 381,
     "y": 210,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -920,7 +920,7 @@ const MASTER_IDEAS = [
     "description": "Explore privacy-preserving collaborative machine learning across longevity, aging, genomics, epigenetics, and cellular datasets, allowing institutions to develop shared models without centralizing all sensitive patient data.",
     "potential": "Accelerates collaborative aging research, cellular biomarker discovery, and clinical trials while strictly preserving institutional privacy.",
     "cluster": "Core Breakthroughs",
-    "x": 430,
+    "x": 371,
     "y": 130,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -936,7 +936,7 @@ const MASTER_IDEAS = [
     "description": "A platform where anyone can rent items from other people or businesses. The platform connects owners and renters and earns revenue through commissions, platform fees, or advertising, subject to trust, insurance, logistics, and dispute resolution.",
     "potential": "Maximizes utilization of underused high-value physical assets and creates decentralized income opportunities for owners.",
     "cluster": "Core Breakthroughs",
-    "x": 180,
+    "x": 121,
     "y": 290,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -952,7 +952,7 @@ const MASTER_IDEAS = [
     "description": "A framework for making AI workflows more dependable by emphasizing user intent, evidence verification, traceability, and controlled execution. Check AI outputs and actions against reliable sources and explicit objectives.",
     "potential": "Essential auditing and safety protocol for autonomous agents operating in business, research, and high-consequence enterprise workflows.",
     "cluster": "Core Breakthroughs",
-    "x": 310,
+    "x": 251,
     "y": 180,
     "magnitude": 8,
     "color": "#fbbf24"
@@ -968,7 +968,7 @@ const MASTER_IDEAS = [
     "description": "A proposed calculator and mathematical exploration system distinguishing verified numerical computation from theoretical or symbolic reasoning. Makes advanced calculations accessible without presenting conjectures as proven results.",
     "potential": "Bridges symbolic computer algebra and rigorous formal verification for mathematicians and students.",
     "cluster": "Deep Computing",
-    "x": 120,
+    "x": 61,
     "y": 350,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -984,7 +984,7 @@ const MASTER_IDEAS = [
     "description": "Investigate cryptographic systems designed to withstand quantum-capable attackers, compare established post-quantum algorithms, and evaluate security assumptions, implementation risks, and possible architectures.",
     "potential": "Prepares critical digital infrastructure for the post-RSA quantum computing transition.",
     "cluster": "Deep Computing",
-    "x": 200,
+    "x": 141,
     "y": 370,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -1000,7 +1000,7 @@ const MASTER_IDEAS = [
     "description": "Explore an encryption scheme inspired by randomness, with the goal of making unauthorized decryption computationally infeasible, evaluating formal security bounds and entropy guarantees.",
     "potential": "Investigates mathematical boundaries between pseudo-random entropy injection and provable ciphertext security.",
     "cluster": "Deep Computing",
-    "x": 110,
+    "x": 51,
     "y": 430,
     "magnitude": 6,
     "color": "#38bdf8"
@@ -1016,7 +1016,7 @@ const MASTER_IDEAS = [
     "description": "Build a Windows-inspired desktop operating-system experience with a bootable prototype, system architecture, build pipeline, and emulator-based validation. An independently engineered desktop environment rather than merely reskinning a desktop.",
     "potential": "Independent desktop platform free from Big Tech surveillance and bloatware.",
     "cluster": "Deep Computing",
-    "x": 180,
+    "x": 121,
     "y": 460,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -1032,7 +1032,7 @@ const MASTER_IDEAS = [
     "description": "Run useful AI models locally on constrained hardware, reducing dependence on paid APIs while improving privacy, memory efficiency, inference speed, and practical accessibility.",
     "potential": "Democratizes intelligent compute without subscription lock-in or telemetry leaks.",
     "cluster": "Deep Computing",
-    "x": 260,
+    "x": 201,
     "y": 420,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -1048,7 +1048,7 @@ const MASTER_IDEAS = [
     "description": "A platform concept for automatically creating educational courses, ebooks, PDFs, and videos using AI, reducing the manual effort required to turn knowledge into digital products.",
     "potential": "Autonomous knowledge synthesis from raw unstructured domain notes into publication-ready multimedia.",
     "cluster": "Deep Computing",
-    "x": 310,
+    "x": 251,
     "y": 360,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -1064,7 +1064,7 @@ const MASTER_IDEAS = [
     "description": "An automated valuation framework combining discounted cash flow, comparable-company analysis, net asset value, Monte Carlo simulation, trusted financial data, and rigorous validation for acquisition screening.",
     "potential": "Delivers institutional-grade investment screening in seconds rather than multi-day manual spreadsheet cycles.",
     "cluster": "Deep Computing",
-    "x": 280,
+    "x": 221,
     "y": 490,
     "magnitude": 8,
     "color": "#38bdf8"
@@ -1080,7 +1080,7 @@ const MASTER_IDEAS = [
     "description": "A quantitative investment system exploring adaptive strategy selection, market-state estimation, news-sensitive risk controls, and portfolio execution with paper/live trading integration.",
     "potential": "Self-adapting quantitative asset allocator responding in real-time to macro volatility shifts.",
     "cluster": "Deep Computing",
-    "x": 220,
+    "x": 161,
     "y": 540,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -1096,7 +1096,7 @@ const MASTER_IDEAS = [
     "description": "A security-oriented software project represented by an AEGIS-Core prototype, enforcing verification and guardrails for autonomous agents against prompt injection and tool abuse.",
     "potential": "Crucial runtime containment firewall for autonomous multi-agent toolchains.",
     "cluster": "Deep Computing",
-    "x": 140,
+    "x": 81,
     "y": 520,
     "magnitude": 7,
     "color": "#38bdf8"
@@ -1112,7 +1112,7 @@ const MASTER_IDEAS = [
     "description": "A recurring research principle across projects: turn ambitious technical claims into testable hypotheses, reproducible experiments, baselines, ablations, and evidence-backed reports.",
     "potential": "Establishes scientific rigor and reproducibility in modern AI experimentation.",
     "cluster": "Deep Computing",
-    "x": 320,
+    "x": 261,
     "y": 450,
     "magnitude": 6,
     "color": "#38bdf8"
@@ -1128,7 +1128,7 @@ const MASTER_IDEAS = [
     "description": "A desktop application that turns a topic into a video workflow using AI-generated scripts, YouTube clip discovery, transcript and timestamp matching, clip trimming, synthetic narration, and audio mixing.",
     "potential": "Cuts long-form video production from days to minutes with automated footage alignment.",
     "cluster": "Software & Automation",
-    "x": 420,
+    "x": 361,
     "y": 370,
     "magnitude": 7,
     "color": "#34d399"
@@ -1144,7 +1144,7 @@ const MASTER_IDEAS = [
     "description": "A cross-platform desktop application that plays selected YouTube clips in sequence to accompany AI-generated narration.",
     "potential": "Enables instant live audio-visual presentation assembly without rendering monolithic MP4 files.",
     "cluster": "Software & Automation",
-    "x": 480,
+    "x": 421,
     "y": 350,
     "magnitude": 6,
     "color": "#34d399"
@@ -1160,7 +1160,7 @@ const MASTER_IDEAS = [
     "description": "A free, open-source command-line and desktop GUI tool for downloading YouTube videos, designed to operate without a dedicated backend server.",
     "potential": "Zero-telemetry client-side media extraction for researchers, educators, and offline archivists.",
     "cluster": "Software & Automation",
-    "x": 460,
+    "x": 401,
     "y": 420,
     "magnitude": 6,
     "color": "#34d399"
@@ -1176,7 +1176,7 @@ const MASTER_IDEAS = [
     "description": "An AI email-management application concept with inbox summarization, priority classification, explanations of importance, and suggested action items.",
     "potential": "Solves email overload by transforming unorganized inboxes into an actionable executive summary.",
     "cluster": "Software & Automation",
-    "x": 400,
+    "x": 341,
     "y": 470,
     "magnitude": 6,
     "color": "#34d399"
@@ -1192,7 +1192,7 @@ const MASTER_IDEAS = [
     "description": "A CRM engineering project with configurable custom objects, typed fields, relationships, dynamic forms, record management, multi-tenant isolation, role-based access control, and automated tests.",
     "potential": "Open, modular enterprise alternative to costly Salesforce licenses for modern growth teams.",
     "cluster": "Software & Automation",
-    "x": 500,
+    "x": 441,
     "y": 480,
     "magnitude": 7,
     "color": "#34d399"
@@ -1208,7 +1208,7 @@ const MASTER_IDEAS = [
     "description": "An automation system for video publishing, playlists, metadata optimization, and channel analytics through the YouTube Data API.",
     "potential": "Enables hands-free multi-channel publication pipelines with automated SEO tagging.",
     "cluster": "Software & Automation",
-    "x": 560,
+    "x": 501,
     "y": 410,
     "magnitude": 6,
     "color": "#34d399"
@@ -1224,7 +1224,7 @@ const MASTER_IDEAS = [
     "description": "A concept for generating a personal portfolio website from a user's input, producing a customized web presence with automatically generated HTML, CSS, and JavaScript.",
     "potential": "Turns developer GitHub profiles and resumes into high-aesthetic interactive web experiences instantly.",
     "cluster": "Software & Automation",
-    "x": 580,
+    "x": 521,
     "y": 470,
     "magnitude": 6,
     "color": "#34d399"
@@ -1240,7 +1240,7 @@ const MASTER_IDEAS = [
     "description": "A broader automation direction connecting AI models, tools, and application workflows to execute multi-step tasks with minimal manual intervention.",
     "potential": "Bridges multi-modal foundational models with real desktop and web APIs for true hands-off productivity.",
     "cluster": "Software & Automation",
-    "x": 510,
+    "x": 451,
     "y": 550,
     "magnitude": 7,
     "color": "#34d399"
@@ -1256,7 +1256,7 @@ const MASTER_IDEAS = [
     "description": "A faceless AI-assisted educational YouTube channel covering technology, science, finance, health, and motivation.",
     "potential": "High-margin digital education brand powered by automated scripting, narration, and editing workflows.",
     "cluster": "Platforms & Ventures",
-    "x": 670,
+    "x": 611,
     "y": 380,
     "magnitude": 6,
     "color": "#fb7185"
@@ -1272,7 +1272,7 @@ const MASTER_IDEAS = [
     "description": "Create and monetize courses, ebooks, videos, and memberships through AI-assisted content production and distribution.",
     "potential": "Scalable content monetization engine leveraging automated multi-format publishing.",
     "cluster": "Platforms & Ventures",
-    "x": 740,
+    "x": 681,
     "y": 360,
     "magnitude": 6,
     "color": "#fb7185"
@@ -1288,7 +1288,7 @@ const MASTER_IDEAS = [
     "description": "The Rent Anything concept expanded into a trust-based marketplace for underutilized physical assets with insurance and dispute guarantees.",
     "potential": "Creates a circular peer-to-peer asset sharing economy reducing waste and financial barriers.",
     "cluster": "Platforms & Ventures",
-    "x": 800,
+    "x": 741,
     "y": 420,
     "magnitude": 7,
     "color": "#fb7185"
@@ -1304,7 +1304,7 @@ const MASTER_IDEAS = [
     "description": "A unified workflow for scripts, narration, footage selection, video editing, thumbnails, and publishing across YouTube, TikTok, and Instagram.",
     "potential": "All-in-one content creation cockpit reducing studio overhead by 90%.",
     "cluster": "Platforms & Ventures",
-    "x": 710,
+    "x": 651,
     "y": 450,
     "magnitude": 6,
     "color": "#fb7185"
@@ -1320,7 +1320,7 @@ const MASTER_IDEAS = [
     "description": "A centralized website connecting projects, GitHub repositories, research, demonstrations, professional profiles, and publications.",
     "potential": "Reinvents developer identity beyond flat static resumes into dynamic, interactive proof-of-work hubs.",
     "cluster": "Platforms & Ventures",
-    "x": 660,
+    "x": 601,
     "y": 520,
     "magnitude": 6,
     "color": "#fb7185"
@@ -1336,7 +1336,7 @@ const MASTER_IDEAS = [
     "description": "Use automation to produce structured research reports, evidence dossiers, technical documentation, and reproducible experiment summaries.",
     "potential": "Accelerates scientific dissemination by turning messy research lab notebooks into formatted whitepapers.",
     "cluster": "Platforms & Ventures",
-    "x": 760,
+    "x": 701,
     "y": 510,
     "magnitude": 6,
     "color": "#fb7185"
@@ -1352,7 +1352,7 @@ const MASTER_IDEAS = [
     "description": "Investigate whether subtle facial muscle signals, subvocal activity, or neural signals can support communication without audible speech.",
     "potential": "Enables private, inaudible digital interaction and speech restoration for individuals with vocal fold trauma.",
     "cluster": "Frontier Science",
-    "x": 560,
+    "x": 501,
     "y": 150,
     "magnitude": 7,
     "color": "#c084fc"
@@ -1368,7 +1368,7 @@ const MASTER_IDEAS = [
     "description": "Explore a wearable interface for acquiring brain signals and connecting them to computational systems for assistive or experimental applications.",
     "potential": "Non-invasive neuro-control for devices, synthetic telepathy research, and accessibility.",
     "cluster": "Frontier Science",
-    "x": 630,
+    "x": 571,
     "y": 100,
     "magnitude": 7,
     "color": "#c084fc"
@@ -1384,7 +1384,7 @@ const MASTER_IDEAS = [
     "description": "Overarching ambition to investigate aging mechanisms, cellular rejuvenation, and whether biological lifespan can be substantially extended. Long-term research direction.",
     "potential": "Tackles fundamental causes of senescent decay and systemic organ degradation.",
     "cluster": "Frontier Science",
-    "x": 720,
+    "x": 661,
     "y": 80,
     "magnitude": 8,
     "color": "#c084fc"
@@ -1400,7 +1400,7 @@ const MASTER_IDEAS = [
     "description": "Apply machine learning to chemical datasets to predict mutagenicity or toxicity, using molecular features, graph neural networks, and rigorous evaluation (ToxiGraph).",
     "potential": "Accelerates pharmaceutical drug candidate screening while eliminating unnecessary animal testing.",
     "cluster": "Frontier Science",
-    "x": 640,
+    "x": 581,
     "y": 190,
     "magnitude": 7,
     "color": "#c084fc"
@@ -1416,7 +1416,7 @@ const MASTER_IDEAS = [
     "description": "Build tools that combine financial statement analysis, company screening, valuation methods, and decision-support workflows.",
     "potential": "Empowers retail and boutique investors with automated algorithmic fundamentals analysis.",
     "cluster": "Frontier Science",
-    "x": 580,
+    "x": 521,
     "y": 240,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1432,7 +1432,7 @@ const MASTER_IDEAS = [
     "description": "Investigate retrieval-augmented generation architectures, vector database selection, source-grounded responses, and efficient knowledge retrieval for AI agents.",
     "potential": "Eliminates LLM hallucinations through strict semantic grounding in verified corporate corpora.",
     "cluster": "Frontier Science",
-    "x": 710,
+    "x": 651,
     "y": 180,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1448,7 +1448,7 @@ const MASTER_IDEAS = [
     "description": "Formalize reusable prompting methods and agent skills so AI systems can execute complex tasks more reliably and consistently.",
     "potential": "Provides foundational standardization for modular tool execution across disparate LLM agents.",
     "cluster": "Frontier Science",
-    "x": 780,
+    "x": 721,
     "y": 130,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1464,7 +1464,7 @@ const MASTER_IDEAS = [
     "description": "A reusable system for turning research questions into literature reviews, technical proposals, experiments, validation reports, and project handoffs.",
     "potential": "Compresses research lifecycles by automating tedious literature synthesis and protocol generation.",
     "cluster": "Frontier Science",
-    "x": 850,
+    "x": 791,
     "y": 110,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1480,7 +1480,7 @@ const MASTER_IDEAS = [
     "description": "Automatically transform code repositories, project documentation, research results, and demonstrations into polished portfolio entries.",
     "potential": "Ensures technical innovators spend time building rather than formatting showcase decks.",
     "cluster": "Frontier Science",
-    "x": 860,
+    "x": 801,
     "y": 190,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1496,7 +1496,7 @@ const MASTER_IDEAS = [
     "description": "Reduce the hardware barrier to AI by optimizing inference and building practical local systems for devices with limited RAM, energy, and processing power.",
     "potential": "Brings neural compute to developing regions, Raspberry Pis, and low-cost consumer electronics.",
     "cluster": "Frontier Science",
-    "x": 760,
+    "x": 701,
     "y": 250,
     "magnitude": 7,
     "color": "#c084fc"
@@ -1512,7 +1512,7 @@ const MASTER_IDEAS = [
     "description": "Explore low-cost ways to use a smartphone, headset, and computer for immersive gaming without expensive dedicated equipment.",
     "potential": "Eliminates the $1,000+ hardware threshold for spatial gaming adoption.",
     "cluster": "Frontier Science",
-    "x": 830,
+    "x": 771,
     "y": 270,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1528,7 +1528,7 @@ const MASTER_IDEAS = [
     "description": "Automatically create short educational videos with scripts, synthetic voices, visuals, and platform-ready metadata.",
     "potential": "Personalized visual learning modules tailored to individual student learning curves.",
     "cluster": "Frontier Science",
-    "x": 920,
+    "x": 861,
     "y": 160,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1544,7 +1544,7 @@ const MASTER_IDEAS = [
     "description": "Develop tools that help investigate mathematical hypotheses and scientific questions while separating computed results, approximations, conjectures, and proven statements.",
     "potential": "Assists researchers in discovering mathematical conjectures and finding symbolic proofs.",
     "cluster": "Frontier Science",
-    "x": 900,
+    "x": 841,
     "y": 240,
     "magnitude": 6,
     "color": "#c084fc"
@@ -1560,7 +1560,7 @@ const MASTER_IDEAS = [
     "description": "A recurring design philosophy across hardware and software concepts: maximize useful output while minimizing cost, energy, compute, and unnecessary complexity.",
     "potential": "Core guiding ethos ensuring technologies remain environmentally sustainable and universally accessible.",
     "cluster": "Frontier Science",
-    "x": 950,
+    "x": 891,
     "y": 100,
     "magnitude": 7,
     "color": "#c084fc"
@@ -1576,7 +1576,7 @@ const MASTER_IDEAS = [
     "description": "A documented public concept and technical blueprint for using AI to identify potential risks proactively and support earlier intervention.",
     "potential": "Defines proactive threat classification methodologies before real-world catastrophic failure triggers.",
     "cluster": "Research Blueprints",
-    "x": 870,
+    "x": 811,
     "y": 380,
     "magnitude": 7,
     "color": "#fb923c"
@@ -1592,7 +1592,7 @@ const MASTER_IDEAS = [
     "description": "A research and technical blueprint focused on making AI workflows follow user intent, verify evidence, and produce more accountable outputs.",
     "potential": "Provides rigorous formalization for agent accountability and verifiable output proofs.",
     "cluster": "Research Blueprints",
-    "x": 950,
+    "x": 891,
     "y": 360,
     "magnitude": 7,
     "color": "#fb923c"
@@ -1608,7 +1608,7 @@ const MASTER_IDEAS = [
     "description": "A research proposal for selecting computation paths adaptively to balance efficiency and output quality across heterogeneous execution environments.",
     "potential": "Algorithmic foundation for mixed hardware scheduling across CPU, GPU, NPU, and cloud accelerators.",
     "cluster": "Research Blueprints",
-    "x": 900,
+    "x": 841,
     "y": 450,
     "magnitude": 7,
     "color": "#fb923c"
@@ -1624,7 +1624,7 @@ const MASTER_IDEAS = [
     "description": "A series of technical experiments exploring learned invariants, structural routing, latent state, counterfactual control, memory affordances, and cheap-probe strategies within AEON.",
     "potential": "Empirical verification of selective execution savings on deep neural architectures.",
     "cluster": "Research Blueprints",
-    "x": 980,
+    "x": 921,
     "y": 440,
     "magnitude": 7,
     "color": "#fb923c"
@@ -1640,7 +1640,7 @@ const MASTER_IDEAS = [
     "description": "A broader architectural vision for improving AI capability per unit of computation through efficient model design, routing, reuse, and execution.",
     "potential": "Long-term theoretical roadmap toward green, ubiquitous superintelligence.",
     "cluster": "Research Blueprints",
-    "x": 930,
+    "x": 871,
     "y": 530,
     "magnitude": 8,
     "color": "#fb923c"
