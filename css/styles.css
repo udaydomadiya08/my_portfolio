@@ -958,5 +958,206 @@ body {
   margin-top: auto;
 }
 
+/* ========== 6. MOBILE & RESPONSIVE PERFECTION ========== */
+/* Smooth horizontal swiping for filter pills */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Touch action & tap feedback */
+button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-star {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Mobile Navigation Hamburger Animation */
+#mobile-menu-btn.active #menu-bar-1 {
+  transform: translateY(7px) rotate(45deg);
+}
+#mobile-menu-btn.active #menu-bar-2 {
+  opacity: 0;
+}
+#mobile-menu-btn.active #menu-bar-3 {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+#mobile-drawer {
+  animation: slide-drawer 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-drawer {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Terminal Quick Command Chips */
+.terminal-chip {
+  padding: 0.28rem 0.7rem;
+  border-radius: 0.45rem;
+  background: rgba(255, 140, 0, 0.12);
+  border: 1px solid rgba(255, 140, 0, 0.28);
+  color: #fbd38d;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.terminal-chip:hover,
+.terminal-chip:active {
+  background: rgba(255, 140, 0, 0.32);
+  border-color: rgba(255, 180, 50, 0.7);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Mobile Viewports (< 768px) */
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow jitter */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+  }
+
+  /* Safe area padding for notch phones */
+  nav#navbar {
+    padding-top: max(0.25rem, env(safe-area-inset-top));
+  }
+
+  /* Touch-friendly constellation map */
+  .constellation-svg-container {
+    touch-action: pan-y pinch-zoom;
+    min-height: 240px;
+  }
+
+  .constellation-star {
+    touch-action: manipulation;
+  }
+
+  /* Star HUD Tooltip mobile sizing */
+  .star-hud-tooltip {
+    width: 250px;
+    padding: 0.85rem;
+  }
+
+  /* Floating Terminal Trigger button safe positioning */
+  #terminal-trigger-btn {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    right: 1.25rem;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.75rem;
+  }
+
+  /* Terminal Window Responsive */
+  .terminal-window {
+    width: 95vw;
+    height: 75vh;
+    max-height: 520px;
+  }
+  .terminal-title {
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.75rem;
+  }
+
+  /* Architecture Deep-Dive Modal mobile bounds */
+  .modal-content-card {
+    width: 95vw;
+    max-height: 88vh;
+    padding: 1.4rem 1.15rem;
+    border-radius: 1.25rem;
+  }
+  .modal-close-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Extra Small Phones (< 640px) */
+@media (max-width: 640px) {
+  /* Fluid Hero Typography */
+  #hero h1 {
+    font-size: clamp(2.35rem, 11vw, 3.8rem);
+    line-height: 1.05;
+  }
+  #hero p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  /* Section Spacing */
+  section {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  /* Top 10 Project Card Padding & Badge */
+  .project-card.top {
+    padding: 1.35rem 1.15rem;
+    border-radius: 1.25rem;
+  }
+  .rank-badge {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.82rem;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  /* Timeline & Idea Cards on mobile */
+  .timeline-card {
+    padding: 1.25rem 1.15rem;
+    border-radius: 1.15rem;
+  }
+  .idea-card {
+    padding: 1.25rem 1.1rem;
+    border-radius: 1.15rem;
+  }
+  .repo-card {
+    padding: 1.15rem 1.15rem;
+    border-radius: 1rem;
+  }
+
+  /* iOS Safari auto-zoom prevention: input must be >= 16px */
+  #terminal-input,
+  #ideas-search {
+    font-size: 16px !important;
+  }
+
+  /* Terminal Body compact */
+  .terminal-body {
+    padding: 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  /* Pipeline Steps vertical track */
+  .pipeline-step {
+    padding: 0.65rem 0.75rem;
+  }
+  .step-label {
+    font-size: 0.78rem;
+  }
+}
+
 
 

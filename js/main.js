@@ -28,6 +28,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
+  // ========== MOBILE MENU TOGGLE & DRAWER ==========
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (mobileMenuBtn && mobileDrawer) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !mobileDrawer.classList.contains('hidden');
+      if (isOpen) {
+        mobileDrawer.classList.add('hidden');
+        mobileMenuBtn.classList.remove('active');
+      } else {
+        mobileDrawer.classList.remove('hidden');
+        mobileMenuBtn.classList.add('active');
+      }
+    });
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.add('hidden');
+        mobileMenuBtn.classList.remove('active');
+      });
+    });
+
+    // Close drawer when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navbar.contains(e.target)) {
+        mobileDrawer.classList.add('hidden');
+        mobileMenuBtn.classList.remove('active');
+      }
+    });
+  }
+
   // Pause background video when tab is hidden to save 100% resources
   document.addEventListener('visibilitychange', () => {
     if (bgVideo) {
@@ -317,6 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const rHalo = rCore * 2.6;
         starsSvg += `
           <g class="constellation-star" id="svg-star-${idea.id}" data-id="${idea.id}" data-category="${idea.category}" transform="translate(${idea.x}, ${idea.y})">
+            <!-- Invisible Touch Hitbox for finger taps on mobile -->
+            <circle class="star-touch-hitbox" cx="0" cy="0" r="24" fill="transparent" pointer-events="all" />
             <!-- Radiant Halo -->
             <circle class="star-halo" cx="0" cy="0" r="${rHalo}" fill="${idea.color}" opacity="0.36" />
             <!-- Intense Starlight Core -->
@@ -329,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
       starsGroup.innerHTML = starsSvg;
     }
 
-    // Interactive Star Hover & Click Listeners
+    // Interactive Star Hover, Touch & Click Listeners
     const allStars = document.querySelectorAll('.constellation-star');
     const allLines = document.querySelectorAll('.constellation-line');
 
@@ -338,8 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const idea = MASTER_IDEAS.find(i => i.id === id);
       if (!idea) return;
 
-      // Hover: Glow + HUD Tooltip
-      starEl.addEventListener('mouseenter', () => {
+      function showStarTooltip() {
         // Brighten connected filaments
         allLines.forEach(line => {
           if (line.dataset.from === id || line.dataset.to === id) {
@@ -349,15 +384,28 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Position HUD Tooltip
+        // Position HUD Tooltip with boundary clamping for mobile & desktop
         if (hudTooltip && svgElem && svgWrapper) {
           const pt = svgElem.createSVGPoint();
           pt.x = idea.x;
           pt.y = idea.y;
           const screenPt = pt.matrixTransform(svgElem.getScreenCTM());
           const wrapperRect = svgWrapper.getBoundingClientRect();
-          const posX = screenPt.x - wrapperRect.left;
-          const posY = screenPt.y - wrapperRect.top;
+          let posX = screenPt.x - wrapperRect.left;
+          let posY = screenPt.y - wrapperRect.top;
+
+          const tooltipWidth = hudTooltip.offsetWidth || 260;
+          const halfW = tooltipWidth / 2;
+
+          // Boundary clamping to prevent clipping off screen edges
+          if (posX - halfW < 12) posX = halfW + 12;
+          if (posX + halfW > wrapperRect.width - 12) posX = wrapperRect.width - halfW - 12;
+
+          if (posY < 130) {
+            hudTooltip.style.transform = 'translate(-50%, 15px)';
+          } else {
+            hudTooltip.style.transform = 'translate(-50%, -120%)';
+          }
 
           hudTooltip.querySelector('.hud-rank').textContent = `#${idea.rank}`;
           hudTooltip.querySelector('.hud-type').textContent = idea.type;
@@ -365,20 +413,26 @@ document.addEventListener('DOMContentLoaded', () => {
           hudTooltip.querySelector('.hud-desc').textContent = idea.description;
 
           hudTooltip.style.left = `${posX}px`;
-          hudTooltip.style.top = `${posY - 12}px`;
+          hudTooltip.style.top = `${posY}px`;
           hudTooltip.classList.remove('opacity-0', 'pointer-events-none');
         }
-      });
+      }
 
-      starEl.addEventListener('mouseleave', () => {
+      function hideStarTooltip() {
         allLines.forEach(line => line.classList.remove('active'));
         if (hudTooltip) {
           hudTooltip.classList.add('opacity-0', 'pointer-events-none');
         }
-      });
+      }
 
-      // Click: Warp to Dossier Card below
+      starEl.addEventListener('mouseenter', showStarTooltip);
+      starEl.addEventListener('touchstart', showStarTooltip, { passive: true });
+
+      starEl.addEventListener('mouseleave', hideStarTooltip);
+
+      // Click / Tap: Warp to Dossier Card below
       starEl.addEventListener('click', () => {
+        hideStarTooltip();
         warpToIdeaCard(idea.id);
       });
     });
@@ -627,6 +681,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (navTerminalBtn) navTerminalBtn.addEventListener('click', openTerminal);
   if (heroTerminalBtn) heroTerminalBtn.addEventListener('click', openTerminal);
   if (terminalCloseBtn) terminalCloseBtn.addEventListener('click', closeTerminal);
+
+  // Quick command chips for mobile & fast clicking
+  const terminalChips = document.querySelectorAll('.terminal-chip');
+  terminalChips.forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cmd = chip.dataset.cmd;
+      if (cmd) {
+        executeCommand(cmd);
+      }
+    });
+  });
 
   terminalModal.addEventListener('click', (e) => {
     if (e.target === terminalModal) closeTerminal();
