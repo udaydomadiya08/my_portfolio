@@ -986,7 +986,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <span class="text-orange-300">top</span>          - Deep dive into Top 3 featured projects
   <span class="text-orange-300">story</span>        - The builder odyssey &amp; quantitative engineering journey
   <span class="text-orange-300">contact</span>      - Interactive social links
-  <span class="text-orange-300">whatsapp</span>     - Direct WhatsApp chat (+91 8200936149)
+  <span class="text-orange-300">whatsapp</span>     - Direct WhatsApp chat link
   <span class="text-orange-300">linkedin</span>     - Open Uday's LinkedIn profile in new tab
   <span class="text-orange-300">github</span>       - Open Uday's GitHub profile in new tab
   <span class="text-orange-300">warp</span>         - Accelerate cosmic background simulation
@@ -1100,7 +1100,7 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
       case 'email':
         printOutput(`
 <span class="text-amber-400 font-bold">CONNECT WITH UDAY:</span>
-• WhatsApp: <a href="https://wa.me/918200936149" target="_blank" class="text-emerald-400 font-semibold underline">+91 8200936149 (Chat Direct)</a>
+• WhatsApp: <a href="https://wa.me/918200936149" target="_blank" class="text-emerald-400 font-semibold underline">WhatsApp Direct ↗</a>
 • Email:    <a href="mailto:udaydomadiya08@gmail.com" class="text-amber-300 font-semibold underline">udaydomadiya08@gmail.com</a>
 • LinkedIn: <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" class="text-cyan-400 underline">https://www.linkedin.com/in/udaydomadiya08</a>
 • GitHub:   <a href="https://github.com/udaydomadiya08" target="_blank" class="text-cyan-400 underline">https://github.com/udaydomadiya08</a>`);
@@ -1108,7 +1108,7 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
 
       case 'whatsapp':
         window.open('https://wa.me/918200936149', '_blank');
-        printOutput('Opening WhatsApp chat with +91 8200936149...');
+        printOutput('Opening WhatsApp chat...');
         break;
 
       case 'linkedin':
