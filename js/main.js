@@ -810,7 +810,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <span class="text-orange-300 font-bold">[COMPETITIVE &amp; HACKATHONS]</span>
 • <span class="text-white font-semibold">NASA Space Apps Challenge</span> — Exoplanet detection model on NASA transit data
-• <span class="text-white font-semibold">MINeD Hackathon</span> — Multimodal research paper to PPT &amp; voice synthesizer`);
+• <span class="text-white font-semibold">MINeD Hackathon</span> — Multimodal research paper to PPT &amp; voice synthesizer
+
+<span class="text-amber-300 font-bold">📥 DOWNLOAD OFFICIAL RESUME (PDF):</span>
+• <a href="assets/Uday_Domadiya_Resume.pdf" download="Uday_Domadiya_Resume.pdf" target="_blank" class="text-orange-400 underline font-semibold hover:text-amber-300">Uday_Domadiya_Resume.pdf (Click to Download)</a>`);
         break;
 
       case 'experience':
