@@ -1598,26 +1598,14 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
 
 .timeline-sidebar-panel {
   position: relative;
-  background: rgba(9, 7, 16, 0.78);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 140, 0, 0.22);
-  border-radius: 1.25rem;
-  padding: 1rem 0.95rem 1rem 0.85rem;
-  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 100, 0, 0.08);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0.25rem 0;
   display: flex;
   flex-direction: column;
-}
-
-.timeline-sidebar-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 180, 50, 0.4), transparent);
-  pointer-events: none;
 }
 
 .timeline-sidebar-header {
@@ -1625,16 +1613,16 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
   align-items: center;
   gap: 0.45rem;
   margin-bottom: 0.85rem;
-  padding-left: 0.35rem;
+  padding-left: 0.25rem;
 }
 
 .timeline-spine-track {
   position: absolute;
-  left: 22px;
-  top: 42px;
-  bottom: 22px;
+  left: 8px;
+  top: 36px;
+  bottom: 18px;
   width: 2px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
   pointer-events: none;
   z-index: 1;
@@ -1642,8 +1630,8 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
 
 .timeline-spine-fill {
   position: absolute;
-  left: 22px;
-  top: 42px;
+  left: 8px;
+  top: 36px;
   width: 2px;
   height: 0px;
   background: linear-gradient(180deg, #ffaa00, #ff5500);
@@ -1813,13 +1801,6 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 12px rgba(255, 120, 0, 0.2);
   z-index: 50;
   pointer-events: none;
-}
-
-/* Ensure clean margin on medium/large desktop viewports so sidebar doesn't overlap text */
-@media (min-width: 1024px) and (max-width: 1399px) {
-  #hero, #story, #skills, #stack, #ideas, #top10, #archive, #contact {
-    padding-left: clamp(4rem, 10vw, 7.5rem) !important;
-  }
 }
 
 

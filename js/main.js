@@ -1262,8 +1262,10 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
 
       const topOffset = (firstRect.top + firstRect.height / 2) - panelRect.top;
       const totalTrackHeight = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
+      const firstDiamondCenter = (firstRect.left + firstRect.width / 2) - panelRect.left;
 
       if (spineTrack) {
+        spineTrack.style.left = `${firstDiamondCenter - 1}px`;
         spineTrack.style.top = `${topOffset}px`;
         spineTrack.style.height = `${Math.max(0, totalTrackHeight)}px`;
         spineTrack.style.bottom = 'auto';
@@ -1275,6 +1277,7 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
         if (activeDiamond) {
           const activeRect = activeDiamond.getBoundingClientRect();
           const progressHeight = Math.max(0, (activeRect.top + activeRect.height / 2) - (firstRect.top + firstRect.height / 2));
+          spineProgress.style.left = `${firstDiamondCenter - 1}px`;
           spineProgress.style.top = `${topOffset}px`;
           spineProgress.style.height = `${progressHeight}px`;
         }
