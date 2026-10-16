@@ -6,7 +6,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   background: #06060a;
 }
 
@@ -29,7 +28,6 @@ body {
   pointer-events: none;
   background: #06060a;
   transform: translateZ(0);
-  will-change: transform;
   contain: strict;
 }
 
@@ -45,7 +43,6 @@ body {
   object-fit: cover;
   opacity: 0.85;
   pointer-events: none;
-  will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -60,7 +57,7 @@ body {
   pointer-events: none;
 }
 
-/* Subtle event horizon aura without heavy filter blurs */
+/* Lightweight static event horizon aura (Zero CPU/GPU animation overhead) */
 .event-horizon-glow {
   position: absolute;
   top: 50%;
@@ -69,30 +66,19 @@ body {
   width: 65vw;
   height: 65vh;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 115, 0, 0.12) 0%, rgba(255, 40, 0, 0.04) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 115, 0, 0.10) 0%, rgba(255, 40, 0, 0.03) 40%, transparent 70%);
   pointer-events: none;
-  animation: pulse-aura 12s ease-in-out infinite alternate;
-  will-change: transform, opacity;
-}
-
-@keyframes pulse-aura {
-  0% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.65; }
-  100% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.95; }
 }
 
 /* ========== NAVBAR ========== */
 #navbar {
   background: transparent;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  transition: all 0.4s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 #navbar.scrolled {
-  background: rgba(8, 7, 13, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(8, 7, 13, 0.94);
   border-bottom: 1px solid rgba(255, 120, 0, 0.2);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 100, 0, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 100, 0, 0.08);
 }
 
 /* ========== FILTER BUTTONS ========== */
@@ -104,7 +90,7 @@ body {
   background: rgba(18, 14, 26, 0.45);
   border: 1px solid rgba(255, 130, 20, 0.22);
   color: rgba(255, 255, 255, 0.75);
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 .filter-btn:hover {
@@ -125,16 +111,13 @@ body {
 /* ========== PROJECT CARDS (TRANSPARENT COSMIC GLASS) ========== */
 .project-card {
   position: relative;
-  background: rgba(8, 6, 16, 0.32);
+  background: rgba(8, 6, 16, 0.35);
   border: 1px solid rgba(255, 140, 0, 0.25);
   border-radius: 1.5rem;
   padding: 2rem;
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  contain: content;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .project-card::before {
@@ -214,19 +197,14 @@ body {
 /* ========== SMALL REPO CARDS (TRANSPARENT GLASS) ========== */
 .repo-card {
   position: relative;
-  background: rgba(8, 6, 16, 0.28);
+  background: rgba(8, 6, 16, 0.35);
   border: 1px solid rgba(255, 130, 0, 0.18);
   border-radius: 1.1rem;
   padding: 1.4rem 1.55rem;
-  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  contain: content;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 160px;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .repo-card:hover {
@@ -289,12 +267,10 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(4, 4, 8, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(4, 4, 8, 0.88);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 #terminal-modal.active {
@@ -468,8 +444,6 @@ body {
   border-radius: 50%;
   pointer-events: none !important;
   animation: orbit-spin infinite linear;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 .ring-1 { width: 280px; height: 280px; animation-duration: 32s; z-index: 15; }
@@ -481,12 +455,17 @@ body {
   to { transform: rotate(360deg); }
 }
 
+.orbit-paused .orbit-ring,
+.orbit-paused .skill-orb {
+  animation-play-state: paused !important;
+}
+
 /* Individual Skill Nodes */
 .skill-orb {
   position: absolute;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
-  background: rgba(12, 9, 20, 0.45);
+  background: rgba(12, 9, 20, 0.75);
   border: 1px solid rgba(255, 140, 0, 0.4);
   color: #fff;
   font-size: 0.8rem;
@@ -497,12 +476,10 @@ body {
   gap: 0.45rem;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 110, 0, 0.18);
   cursor: pointer !important;
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   pointer-events: auto !important;
   z-index: 50 !important;
   user-select: none;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 /* Counter-rotate skill orbs so text remains upright */
@@ -558,12 +535,10 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(4, 4, 8, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(4, 4, 8, 0.88);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 #project-modal.active {
@@ -676,8 +651,6 @@ body {
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
   position: relative;
   overflow: hidden;
-  contain: content;
-  transform: translateZ(0);
 }
 
 .metric-card::before {
@@ -696,15 +669,12 @@ body {
 }
 
 .timeline-card {
-  background: rgba(8, 6, 16, 0.32);
+  background: rgba(8, 6, 16, 0.35);
   border: 1px solid rgba(255, 140, 0, 0.25);
   border-radius: 1.25rem;
   padding: 1.75rem 2rem;
-  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   position: relative;
-  contain: content;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .timeline-card:hover {
@@ -732,7 +702,7 @@ body {
   background: rgba(20, 16, 26, 0.7);
   border: 1px solid rgba(255, 130, 20, 0.18);
   color: rgba(255, 255, 255, 0.7);
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 .journey-btn:hover {
@@ -755,7 +725,6 @@ body {
   border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 120, 0, 0.12);
-  transform: translateZ(0);
 }
 
 .cluster-btn {
@@ -867,17 +836,13 @@ body {
 /* 53 Ideas Bento Cards (Transparent Glass) */
 .idea-card {
   position: relative;
-  background: rgba(8, 6, 16, 0.28);
+  background: rgba(8, 6, 16, 0.35);
   border: 1px solid rgba(255, 140, 0, 0.22);
   border-radius: 1.25rem;
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-  contain: content;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 220px;
-  transform: translateZ(0);
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   scroll-margin-top: 100px;
 }
 

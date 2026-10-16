@@ -42,16 +42,16 @@
   <!-- Black Hole Simulation Video Background -->
   <div id="bg-video-container">
     <video id="bg-video" autoplay loop muted playsinline preload="auto" disablePictureInPicture poster="assets/blackhole-poster.jpg">
+      <source media="(max-width: 768px)" src="assets/blackhole-mobile.mp4" type="video/mp4">
       <source src="assets/blackhole-opt.mp4" type="video/mp4">
       <source src="assets/blackhole-opt.webm" type="video/webm">
-      <source src="assets/blackhole.mp4" type="video/mp4">
     </video>
     <div class="video-vignette"></div>
     <div class="event-horizon-glow"></div>
   </div>
 
   <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
       <a href="#hero" class="font-display font-bold text-xl tracking-tight flex items-center gap-2 group">
         <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 shadow-lg shadow-orange-500/80 group-hover:scale-125 transition"></span>
@@ -67,19 +67,19 @@
       </div>
       <div class="flex items-center gap-2 sm:gap-2.5">
         <!-- Terminal HUD Button in Nav -->
-        <button id="nav-terminal-btn" class="px-2.5 sm:px-3 py-1.5 rounded-full bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-amber-300 font-mono text-xs flex items-center gap-1.5 transition backdrop-blur">
+        <button id="nav-terminal-btn" class="px-2.5 sm:px-3 py-1.5 rounded-full bg-orange-500/15 hover:bg-orange-500/25 border border-orange-500/30 text-amber-300 font-mono text-xs flex items-center gap-1.5 transition">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>&gt;_ CLI</span>
         </button>
         <!-- LinkedIn -->
         <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener"
-           class="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 hover:from-orange-500/25 hover:to-amber-500/25 border border-orange-500/30 hover:border-orange-500/60 text-xs sm:text-sm font-medium text-amber-200 hover:text-white transition-all backdrop-blur flex items-center gap-1.5 sm:gap-2 shadow-sm shadow-orange-500/10">
+           class="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500/15 to-amber-500/15 hover:from-orange-500/30 hover:to-amber-500/30 border border-orange-500/30 hover:border-orange-500/60 text-xs sm:text-sm font-medium text-amber-200 hover:text-white transition-all flex items-center gap-1.5 sm:gap-2 shadow-sm shadow-orange-500/10">
           <svg class="w-3.5 h-3.5 fill-current text-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           <span class="hidden sm:inline">LinkedIn</span> ↗
         </a>
         <!-- GitHub -->
         <a href="https://github.com/udaydomadiya08" target="_blank" rel="noopener"
-           class="hidden sm:flex px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-xs sm:text-sm font-medium text-white/80 hover:text-white transition backdrop-blur items-center gap-2">
+           class="hidden sm:flex px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-xs sm:text-sm font-medium text-white/80 hover:text-white transition items-center gap-2">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           <span class="hidden sm:inline">GitHub</span> ↗
         </a>
@@ -93,24 +93,24 @@
     </div>
 
     <!-- Mobile Drawer Menu Overlay -->
-    <div id="mobile-drawer" class="md:hidden hidden bg-[#0b0814]/95 border-b border-orange-500/20 backdrop-blur-xl transition-all duration-300 px-5 py-5 space-y-3 shadow-2xl">
+    <div id="mobile-drawer" class="md:hidden hidden bg-[#0b0814]/98 border-b border-orange-500/20 transition-all duration-300 px-5 py-5 space-y-3 shadow-2xl">
       <div class="grid grid-cols-2 gap-2 text-sm">
-        <a href="#story" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
+        <a href="#story" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
           <span>📖</span> Story
         </a>
-        <a href="#stack" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
+        <a href="#stack" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
           <span>🪐</span> Tech Orbit
         </a>
         <a href="#ideas" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 to-orange-500/15 border border-amber-500/30 text-amber-200 font-semibold hover:text-white transition col-span-2">
           <span class="text-amber-400">✦</span> 53 Ideas Constellation &amp; Dossier
         </a>
-        <a href="#top10" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
+        <a href="#top10" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
           <span>🏆</span> Top Projects
         </a>
-        <a href="#archive" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
+        <a href="#archive" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition">
           <span>📦</span> All Repos
         </a>
-        <a href="#contact" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition col-span-2">
+        <a href="#contact" class="mobile-nav-link flex items-center gap-2 p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-white/80 hover:text-amber-300 hover:bg-orange-500/10 transition col-span-2">
           <span>✉️</span> Get in Touch
         </a>
       </div>
@@ -128,7 +128,7 @@
   <!-- ========== HERO ========== -->
   <section id="hero" class="min-h-screen flex items-center justify-center relative px-6">
     <div class="max-w-5xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-950/40 border border-orange-500/25 text-sm text-amber-200 mb-8 backdrop-blur shadow-sm shadow-orange-500/20">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-950/60 border border-orange-500/30 text-sm text-amber-200 mb-8 shadow-sm shadow-orange-500/20">
         <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shadow-sm shadow-orange-400"></span>
         Building the future of AI & autonomous systems
       </div>
@@ -147,11 +147,11 @@
         <a href="#top10" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 text-white font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all hover:scale-105">
           Explore Top Projects
         </a>
-        <button id="hero-terminal-btn" class="px-7 py-3.5 rounded-full bg-orange-950/50 hover:bg-orange-500/20 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white transition font-mono text-sm flex items-center gap-2 backdrop-blur shadow-sm">
+        <button id="hero-terminal-btn" class="px-7 py-3.5 rounded-full bg-orange-950/60 hover:bg-orange-500/20 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white transition font-mono text-sm flex items-center gap-2 shadow-sm">
           <span>&gt;_</span> Launch Terminal CLI
         </button>
         <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener"
-           class="px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white transition font-medium flex items-center gap-2 backdrop-blur">
+           class="px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white transition font-medium flex items-center gap-2">
           <svg class="w-4 h-4 fill-current text-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           LinkedIn
         </a>
@@ -167,7 +167,7 @@
   <!-- ========== STORY / THE JOURNEY ========== -->
   <section id="story" class="py-28 px-6 relative">
     <div class="max-w-5xl mx-auto">
-      <div class="story-panel opacity-0 translate-y-12 mb-16 text-center max-w-3xl mx-auto">
+      <div class="story-panel mb-16 text-center max-w-3xl mx-auto">
         <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">The Journey</p>
         <h2 class="font-display text-4xl sm:text-5xl font-bold mb-6 leading-tight">
           From curiosity to<br>
@@ -321,7 +321,7 @@
       <!-- Constellation Celestial Observatory Box -->
       <div class="constellation-viewport-card mb-16 relative">
         <!-- Constellation Controls & Cluster Filters -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 border-b border-white/10 bg-black/30 backdrop-blur-sm rounded-t-2xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 border-b border-white/10 bg-black/40 rounded-t-2xl">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
             <span class="text-xs font-mono uppercase tracking-widest text-amber-300 font-semibold">Sector: Cosmic Constellation Map</span>
@@ -340,40 +340,6 @@
         <!-- Interactive SVG Celestial Map -->
         <div class="constellation-svg-container relative overflow-hidden" id="constellation-svg-wrapper">
           <svg id="constellation-svg" viewBox="0 0 1100 620" preserveAspectRatio="xMidYMid meet" class="w-full h-auto select-none">
-            <defs>
-              <!-- Nebular Gradients (Transparent overlay) -->
-              <radialGradient id="nebula-gold" cx="30%" cy="30%" r="60%">
-                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.10" />
-                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
-              </radialGradient>
-              <radialGradient id="nebula-cyan" cx="20%" cy="70%" r="50%">
-                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.08" />
-                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
-              </radialGradient>
-              <radialGradient id="nebula-purple" cx="80%" cy="25%" r="60%">
-                <stop offset="0%" stop-color="#c084fc" stop-opacity="0.09" />
-                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
-              </radialGradient>
-              <radialGradient id="nebula-rose" cx="75%" cy="75%" r="55%">
-                <stop offset="0%" stop-color="#fb7185" stop-opacity="0.08" />
-                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
-              </radialGradient>
-              <!-- Star Glow Filter -->
-              <filter id="star-glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            <!-- Transparent Celestial Glows over Black Hole -->
-            <circle cx="320" cy="180" r="260" fill="url(#nebula-gold)" />
-            <circle cx="200" cy="450" r="240" fill="url(#nebula-cyan)" />
-            <circle cx="750" cy="180" r="260" fill="url(#nebula-purple)" />
-            <circle cx="740" cy="460" r="230" fill="url(#nebula-rose)" />
-
             <!-- Celestial Grid markings -->
             <line x1="0" y1="310" x2="1100" y2="310" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 6" />
             <line x1="550" y1="0" x2="550" y2="620" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 6" />
@@ -401,7 +367,7 @@
         </div>
 
         <!-- Constellation Hint Footer -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-2 px-4 sm:px-5 py-3 bg-black/25 backdrop-blur-sm border-t border-white/5 text-xs text-white/50 text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-2 px-4 sm:px-5 py-3 bg-black/40 border-t border-white/5 text-xs text-white/50 text-center sm:text-left">
           <span>✦ 53 Coordinates Plotted across 6 Stellar Clusters</span>
           <span class="text-amber-400 font-medium">Tap any star to inspect &amp; warp</span>
         </div>
@@ -497,7 +463,7 @@
           LinkedIn Profile
         </a>
         <a href="https://github.com/udaydomadiya08" target="_blank" rel="noopener"
-           class="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold hover:scale-105 transition flex items-center gap-3 backdrop-blur">
+           class="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold hover:scale-105 transition flex items-center gap-3">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           GitHub Profile
         </a>
@@ -562,7 +528,7 @@
   </div>
 
   <!-- Floating Terminal HUD Button -->
-  <button id="terminal-trigger-btn" class="fixed bottom-6 right-6 z-40 px-4 py-2.5 rounded-full bg-[#0d0a16]/90 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white font-mono text-xs flex items-center gap-2.5 shadow-xl shadow-orange-500/20 backdrop-blur-md transition-all hover:scale-105 group" aria-label="Open Terminal HUD">
+  <button id="terminal-trigger-btn" class="fixed bottom-6 right-6 z-40 px-4 py-2.5 rounded-full bg-[#0d0a16]/95 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white font-mono text-xs flex items-center gap-2.5 shadow-xl shadow-orange-500/20 transition-all hover:scale-105 group" aria-label="Open Terminal HUD">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span class="text-orange-400 font-bold">&gt;_</span>
     <span class="font-medium">Terminal CLI</span>

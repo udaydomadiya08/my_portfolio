@@ -11,22 +11,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========== NAVBAR SCROLL (PASSIVE & RAF THROTTLED) ==========
+  // ========== NAVBAR SCROLL (OFF-THREAD INTERSECTION OBSERVER) ==========
   const navbar = document.getElementById('navbar');
-  let navTicking = false;
-  window.addEventListener('scroll', () => {
-    if (!navTicking) {
-      window.requestAnimationFrame(() => {
-        if (window.scrollY > 50) {
-          navbar.classList.add('scrolled');
-        } else {
+  const heroSection = document.getElementById('hero');
+  if (navbar && heroSection && 'IntersectionObserver' in window) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
           navbar.classList.remove('scrolled');
+        } else {
+          navbar.classList.add('scrolled');
         }
-        navTicking = false;
       });
-      navTicking = true;
-    }
-  }, { passive: true });
+    }, { rootMargin: '-70px 0px 0px 0px' });
+    navObserver.observe(heroSection);
+  } else if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
 
   // ========== MOBILE MENU TOGGLE & DRAWER ==========
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -94,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   TOP_PROJECTS.forEach((project, index) => {
     const card = document.createElement('div');
-    card.className = 'project-card top opacity-0 translate-y-16 cursor-pointer group';
+    card.className = 'project-card top cursor-pointer group';
     card.dataset.index = index;
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
@@ -152,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ALL_REPOS.forEach((repo, index) => {
     const card = document.createElement('div');
-    card.className = 'repo-card opacity-0 translate-y-8 group';
+    card.className = 'repo-card group';
     card.dataset.lang = repo.language;
     card.dataset.category = repo.category || 'Other';
     card.dataset.name = repo.name.toLowerCase();
@@ -594,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (journeyGrid && typeof RESUME_JOURNEY !== 'undefined') {
     RESUME_JOURNEY.forEach((item, idx) => {
       const card = document.createElement('div');
-      card.className = 'timeline-card opacity-0 translate-y-8 flex flex-col';
+      card.className = 'timeline-card flex flex-col';
       card.dataset.category = item.category;
 
       card.innerHTML = `
@@ -629,25 +636,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const cat = card.dataset.category;
           if (filter === 'all' || cat === filter) {
             card.style.display = 'flex';
-            gsap.fromTo(card, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
           } else {
             card.style.display = 'none';
           }
         });
       });
-    });
-
-    // Animate journey cards on scroll
-    gsap.to('.timeline-card', {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '#story',
-        start: 'top 75%',
-      }
     });
   }
 
@@ -968,38 +961,33 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
     });
   });
 
-  // ========== GSAP SCROLL ANIMATIONS ==========
-  // Story panel
-  gsap.to('.story-panel', {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#story',
-      start: 'top 75%',
-    }
-  });
+  // Pause orbit animations when Stack section is out of viewport (saves GPU cycles)
+  const stackSection = document.getElementById('stack');
+  const orbitStage = document.getElementById('orbit-stage');
+  if (stackSection && orbitStage && 'IntersectionObserver' in window) {
+    const orbitObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          orbitStage.classList.remove('orbit-paused');
+        } else {
+          orbitStage.classList.add('orbit-paused');
+        }
+      });
+    }, { rootMargin: '100px 0px 100px 0px' });
+    orbitObserver.observe(stackSection);
+  }
 
-  // Top project cards stagger
-  gsap.to('.project-card.top', {
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#top10',
-      start: 'top 70%',
-    }
-  });
-
-  // All repo cards — optimized with batching for instant fluid scroll
-  ScrollTrigger.batch('.repo-card', {
-    interval: 0.1,
-    batchMax: 6,
-    onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.03, duration: 0.45, ease: 'power2.out', overwrite: true }),
-    once: true
+  // Smooth scroll handler for anchor links (prevents global CSS smooth scroll fight)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#' || !targetId) return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   });
 
   // Hero entrance
