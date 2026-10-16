@@ -350,12 +350,41 @@ document.addEventListener('DOMContentLoaded', () => {
       linesGroup.innerHTML = linesSvg;
     }
 
-    // 2. Draw 53 Star Nodes
+    // 2. Draw 53 Star Nodes with directional collision-free labels
     if (starsGroup) {
       let starsSvg = '';
       MASTER_IDEAS.forEach(idea => {
         const rCore = Math.max(3.5, idea.magnitude * 0.55);
         const rHalo = rCore * 2.6;
+        let labelAttrs = '';
+        switch(idea.labelPos) {
+          case 'top':
+            labelAttrs = `x="0" y="${-(rCore + 7)}" text-anchor="middle"`;
+            break;
+          case 'bottom':
+            labelAttrs = `x="0" y="${rCore + 15}" text-anchor="middle"`;
+            break;
+          case 'left':
+            labelAttrs = `x="${-(rCore + 7)}" y="3.5" text-anchor="end"`;
+            break;
+          case 'top-left':
+            labelAttrs = `x="${-(rCore + 6)}" y="${-(rCore + 5)}" text-anchor="end"`;
+            break;
+          case 'top-right':
+            labelAttrs = `x="${rCore + 6}" y="${-(rCore + 5)}" text-anchor="start"`;
+            break;
+          case 'bottom-left':
+            labelAttrs = `x="${-(rCore + 6)}" y="${rCore + 14}" text-anchor="end"`;
+            break;
+          case 'bottom-right':
+            labelAttrs = `x="${rCore + 6}" y="${rCore + 14}" text-anchor="start"`;
+            break;
+          case 'right':
+          default:
+            labelAttrs = `x="${rCore + 7}" y="3.5" text-anchor="start"`;
+            break;
+        }
+
         starsSvg += `
           <g class="constellation-star" id="svg-star-${idea.id}" data-id="${idea.id}" data-category="${idea.category}" transform="translate(${idea.x}, ${idea.y})">
             <!-- Invisible Touch Hitbox for finger taps on mobile -->
@@ -364,8 +393,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <circle class="star-halo" cx="0" cy="0" r="${rHalo}" fill="${idea.color}" opacity="0.36" />
             <!-- Intense Starlight Core -->
             <circle class="star-core" cx="0" cy="0" r="${rCore}" fill="${idea.color}" />
-            <!-- Star Label -->
-            <text class="star-label" x="${rCore + 5}" y="3">${idea.rank}. ${idea.shortTitle}</text>
+            <!-- Star Label with directional offset -->
+            <text class="star-label" ${labelAttrs}>${idea.rank}. ${idea.shortTitle}</text>
           </g>
         `;
       });
@@ -449,11 +478,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.getElementById(`idea-card-${ideaId}`);
       if (!card) return;
 
-      // If currently filtered out, reset filter to 'all' or idea's category
-      if (card.classList.contains('hidden')) {
-        const catBtn = Array.from(ideasCardFilters).find(b => b.dataset.filter === card.dataset.category) ||
-                       Array.from(ideasCardFilters).find(b => b.dataset.filter === 'all');
-        if (catBtn) catBtn.click();
+      // If currently filtered out, switch filter to idea's category
+      const targetCat = card.dataset.category;
+      const catBtn = Array.from(ideasCardFilters).find(b => b.dataset.filter === targetCat);
+      if (catBtn && !catBtn.classList.contains('active')) {
+        catBtn.click();
       }
 
       // Smooth scroll to card
@@ -550,11 +579,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // 5. Search & Filter Cards Logic
+    // 5. Search & Filter Cards Logic (Category-wise only)
     function filterIdeaCards() {
       const query = (ideasSearch ? ideasSearch.value.trim().toLowerCase() : '');
       const activeFilterBtn = document.querySelector('#ideas-card-filters .filter-btn.active');
-      const activeCat = activeFilterBtn ? activeFilterBtn.dataset.filter : 'all';
+      const activeCat = activeFilterBtn ? activeFilterBtn.dataset.filter : 'core';
 
       let visibleCount = 0;
       document.querySelectorAll('.idea-card').forEach(card => {
@@ -563,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const idea = MASTER_IDEAS.find(i => i.id === id);
         if (!idea) return;
 
-        const matchesCat = (activeCat === 'all' || cat === activeCat);
+        const matchesCat = (cat === activeCat);
         const matchesQuery = !query || 
           idea.title.toLowerCase().includes(query) ||
           idea.description.toLowerCase().includes(query) ||
@@ -579,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (ideasCount) {
-        ideasCount.textContent = `${visibleCount} of 53`;
+        ideasCount.textContent = query ? `${visibleCount} found` : `${visibleCount} ideas`;
       }
     }
 
@@ -592,8 +621,36 @@ document.addEventListener('DOMContentLoaded', () => {
         ideasCardFilters.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         filterIdeaCards();
+
+        const cat = btn.dataset.filter;
+        const matchingCluster = document.querySelector(`#constellation-cluster-filters .cluster-btn[data-cluster="${cat}"]`);
+        if (matchingCluster && !matchingCluster.classList.contains('active')) {
+          clusterFilters.forEach(b => b.classList.remove('active'));
+          matchingCluster.classList.add('active');
+          allStars.forEach(star => {
+            if (star.dataset.category === cat) {
+              star.classList.remove('dimmed');
+              star.classList.add('active');
+            } else {
+              star.classList.add('dimmed');
+              star.classList.remove('active');
+            }
+          });
+          allLines.forEach(line => {
+            const fromStar = MASTER_IDEAS.find(s => s.id === line.dataset.from);
+            const toStar = MASTER_IDEAS.find(s => s.id === line.dataset.to);
+            if (fromStar && toStar && (fromStar.category === cat || toStar.category === cat)) {
+              line.classList.remove('dimmed');
+            } else {
+              line.classList.add('dimmed');
+            }
+          });
+        }
       });
     });
+
+    // Initial run: show only active category (Core Breakthroughs) on page load
+    filterIdeaCards();
   }
 
   // ========== RENDER RESUME JOURNEY (INTERACTIVE COSMIC TIMELINE) ==========
