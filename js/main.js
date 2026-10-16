@@ -815,7 +815,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </p>
 
           <!-- Skill Badges Container -->
-          <div class="flex flex-wrap gap-2 pt-3 border-t border-white/5 mt-auto">
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-white/5">
             ${domain.skills.map(skill => {
               const isMatch = cleanQuery && skill.toLowerCase().includes(cleanQuery);
               return `<span class="skill-item-pill ${isMatch ? 'highlight' : ''}" title="${skill}">${skill}</span>`;
