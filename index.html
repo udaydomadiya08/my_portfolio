@@ -240,17 +240,22 @@
   <!-- ========== HERO ========== -->
   <section id="hero" class="min-h-screen flex items-center justify-center relative px-6">
     <div class="max-w-5xl mx-auto text-center">
-      <!-- Founder Portrait Avatar -->
-      <div class="relative inline-block mb-6">
-        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-[3px] bg-gradient-to-tr from-amber-400 via-orange-500 to-rose-500 shadow-xl shadow-orange-500/30 mx-auto">
-          <img src="assets/uday-domadiya.jpg" alt="Uday Domadiya" class="w-full h-full object-cover rounded-full border-2 border-[#090714]" />
+      <!-- Founder Portrait Avatar (Centered, 2x size) -->
+      <div class="flex justify-center mb-6">
+        <div class="relative inline-block">
+          <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-orange-500 to-rose-500 shadow-2xl shadow-orange-500/35 mx-auto">
+            <img src="assets/uday-domadiya.jpg" alt="Uday Domadiya" class="w-full h-full object-cover rounded-full border-4 border-[#090714]" />
+          </div>
+          <span class="absolute bottom-2.5 right-2.5 w-6 h-6 rounded-full bg-emerald-500 border-3 border-[#090714] shadow-md animate-pulse" title="Available for opportunities"></span>
         </div>
-        <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[#090714] shadow-sm animate-pulse" title="Available for opportunities"></span>
       </div>
 
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-950/60 border border-orange-500/30 text-sm text-amber-200 mb-8 shadow-sm shadow-orange-500/20">
-        <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shadow-sm shadow-orange-400"></span>
-        Building the future of AI & autonomous systems
+      <!-- Message Pill Centered Below Photo -->
+      <div class="flex justify-center mb-8">
+        <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-orange-950/70 border border-orange-500/35 text-sm sm:text-base text-amber-200 shadow-sm shadow-orange-500/20">
+          <span class="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse shadow-sm shadow-orange-400"></span>
+          Building the future of AI & autonomous systems
+        </div>
       </div>
       
       <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-6">
