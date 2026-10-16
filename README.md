@@ -117,6 +117,7 @@ my_portfolio/
 ## 👤 Author
 
 **Uday Domadiya**
+- **Email:** [udaydomadiya08@gmail.com](mailto:udaydomadiya08@gmail.com)
 - **GitHub:** [@udaydomadiya08](https://github.com/udaydomadiya08)
 - **LinkedIn:** [linkedin.com/in/udaydomadiya08](https://www.linkedin.com/in/udaydomadiya08)
 - **Education:** Institute of Technology (B.Tech CSE) & Institute of Management (MBA Finance & Digital Transformation & Analytics), Nirma University.

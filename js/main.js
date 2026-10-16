@@ -1096,8 +1096,10 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
         break;
 
       case 'contact':
+      case 'email':
         printOutput(`
 <span class="text-amber-400 font-bold">CONNECT WITH UDAY:</span>
+• Email:    <a href="mailto:udaydomadiya08@gmail.com" class="text-amber-300 font-semibold underline">udaydomadiya08@gmail.com</a>
 • LinkedIn: <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" class="text-cyan-400 underline">https://www.linkedin.com/in/udaydomadiya08</a>
 • GitHub:   <a href="https://github.com/udaydomadiya08" target="_blank" class="text-cyan-400 underline">https://github.com/udaydomadiya08</a>`);
         break;
@@ -1369,6 +1371,35 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
     setTimeout(() => {
       onScrollSpy();
     }, 150);
+  }
+
+  // Copy Email Button in Contact Section
+  const copyEmailBtn = document.getElementById('copy-email-btn');
+  const copyEmailText = document.getElementById('copy-email-text');
+  if (copyEmailBtn && copyEmailText) {
+    copyEmailBtn.addEventListener('click', async () => {
+      const email = copyEmailBtn.dataset.email || 'udaydomadiya08@gmail.com';
+      try {
+        await navigator.clipboard.writeText(email);
+        copyEmailText.textContent = 'Copied!';
+        copyEmailBtn.classList.add('text-amber-400');
+        setTimeout(() => {
+          copyEmailText.textContent = 'Copy Email';
+          copyEmailBtn.classList.remove('text-amber-400');
+        }, 2200);
+      } catch (err) {
+        const textarea = document.createElement('textarea');
+        textarea.value = email;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        copyEmailText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyEmailText.textContent = 'Copy Email';
+        }, 2200);
+      }
+    });
   }
 
   // Helper icon function
