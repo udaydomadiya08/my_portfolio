@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uday Domadiya — AI Builder & Creator</title>
+  <meta name="description" content="Portfolio of Uday Domadiya — AI systems, autonomous agents, privacy firewalls, and research frameworks." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            primary: '#ff7700',
+            accent: '#ffb703',
+            dark: '#06060a',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-transparent text-white overflow-x-hidden">
+
+  <!-- Black Hole Simulation Video Background -->
+  <div id="bg-video-container">
+    <video id="bg-video" autoplay loop muted playsinline preload="auto" disablePictureInPicture poster="assets/blackhole-poster.jpg">
+      <source src="assets/blackhole-opt.mp4" type="video/mp4">
+      <source src="assets/blackhole-opt.webm" type="video/webm">
+      <source src="assets/blackhole.mp4" type="video/mp4">
+    </video>
+    <div class="video-vignette"></div>
+    <div class="event-horizon-glow"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="font-display font-bold text-xl tracking-tight flex items-center gap-2 group">
+        <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 shadow-lg shadow-orange-500/80 group-hover:scale-125 transition"></span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">UD</span>
+      </a>
+      <div class="hidden md:flex items-center gap-7 text-sm font-medium text-white/70">
+        <a href="#story" class="hover:text-amber-300 transition">Story</a>
+        <a href="#stack" class="hover:text-amber-300 transition">Tech Orbit</a>
+        <a href="#ideas" class="hover:text-amber-300 transition flex items-center gap-1.5 text-amber-200 font-semibold"><span class="text-amber-400">✦</span> 53 Ideas</a>
+        <a href="#top10" class="hover:text-amber-300 transition">Top Projects</a>
+        <a href="#archive" class="hover:text-amber-300 transition">All Repos</a>
+        <a href="#contact" class="hover:text-amber-300 transition">Contact</a>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <!-- Terminal HUD Button in Nav -->
+        <button id="nav-terminal-btn" class="px-3 py-1.5 rounded-full bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-amber-300 font-mono text-xs flex items-center gap-1.5 transition backdrop-blur">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>&gt;_ CLI</span>
+        </button>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener"
+           class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 hover:from-orange-500/25 hover:to-amber-500/25 border border-orange-500/30 hover:border-orange-500/60 text-xs sm:text-sm font-medium text-amber-200 hover:text-white transition-all backdrop-blur flex items-center gap-2 shadow-sm shadow-orange-500/10">
+          <svg class="w-3.5 h-3.5 fill-current text-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <span class="hidden sm:inline">LinkedIn</span> ↗
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/udaydomadiya08" target="_blank" rel="noopener"
+           class="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-xs sm:text-sm font-medium text-white/80 hover:text-white transition backdrop-blur flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span class="hidden sm:inline">GitHub</span> ↗
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="min-h-screen flex items-center justify-center relative px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-950/40 border border-orange-500/25 text-sm text-amber-200 mb-8 backdrop-blur shadow-sm shadow-orange-500/20">
+        <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shadow-sm shadow-orange-400"></span>
+        Building the future of AI & autonomous systems
+      </div>
+      
+      <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-6">
+        <span class="block text-white">Uday</span>
+        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-400 to-rose-500">Domadiya</span>
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+        AI systems • Autonomous agents • Privacy-first tools • Research frameworks<br>
+        Turning ambitious ideas into production-ready software.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#top10" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 text-white font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all hover:scale-105">
+          Explore Top Projects
+        </a>
+        <button id="hero-terminal-btn" class="px-7 py-3.5 rounded-full bg-orange-950/50 hover:bg-orange-500/20 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white transition font-mono text-sm flex items-center gap-2 backdrop-blur shadow-sm">
+          <span>&gt;_</span> Launch Terminal CLI
+        </button>
+        <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener"
+           class="px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white transition font-medium flex items-center gap-2 backdrop-blur">
+          <svg class="w-4 h-4 fill-current text-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="mt-20 flex items-center justify-center gap-2 text-white/40 text-sm animate-bounce">
+        <span>Scroll to explore</span>
+        <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STORY / THE JOURNEY ========== -->
+  <section id="story" class="py-28 px-6 relative">
+    <div class="max-w-5xl mx-auto">
+      <div class="story-panel opacity-0 translate-y-12 mb-16 text-center max-w-3xl mx-auto">
+        <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">The Journey</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-6 leading-tight">
+          From curiosity to<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">shipping real systems</span>
+        </h2>
+        <p class="text-lg text-white/70 leading-relaxed mb-4">
+          I build tools that sit at the intersection of artificial intelligence, privacy, automation, and real-world impact. Every repository is a chapter — some experimental, some production-ready, all driven by the same obsession: make powerful technology accessible, safe, and useful.
+        </p>
+        <p class="text-sm text-white/50">
+          Dual background across Computer Science Engineering and Finance &amp; Digital Transformation &amp; Analytics (Nirma University). Below is a verified track record of my work.
+        </p>
+      </div>
+
+      <!-- Journey Category Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12" id="journey-filters">
+        <button class="journey-btn active" data-jfilter="all">All Milestones</button>
+        <button class="journey-btn" data-jfilter="industry">Industry &amp; Internships</button>
+        <button class="journey-btn" data-jfilter="research">AI Research &amp; Hackathons</button>
+        <button class="journey-btn" data-jfilter="education">Academic Foundations</button>
+      </div>
+
+      <!-- Timeline Bento Grid -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto" id="journey-cards-grid">
+        <!-- Rendered dynamically by JS from RESUME_JOURNEY -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 2. TECH STACK ORBIT CONSTELLATION ========== -->
+  <section id="stack" class="py-28 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">Orbital Capabilities</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Gravitational Tech Stack</h2>
+        <p class="text-white/50 max-w-2xl mx-auto">Technologies orbiting around autonomous AI agents, on-device privacy firewalls, and production systems. Hover or click any node to interact.</p>
+      </div>
+
+      <!-- Orbital 3D View (Desktop) -->
+      <div class="orbit-wrapper hidden md:flex" id="orbit-wrapper">
+        <!-- Singularity Center Core -->
+        <div class="orbit-core text-center cursor-pointer" id="orbit-core-btn" title="Click to view all projects">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Singularity</span>
+          <span class="text-[11px] text-white/60 font-medium">Core AI</span>
+        </div>
+
+        <!-- Orbit Tracks -->
+        <div class="orbit-track orbit-track-1"></div>
+        <div class="orbit-track orbit-track-2"></div>
+        <div class="orbit-track orbit-track-3"></div>
+
+        <!-- Inner Orbit (AI & Reasoning) -->
+        <div class="orbit-ring ring-1">
+          <div class="skill-orb" style="top: 0%; left: 50%;" data-tech-id="pytorch">
+            <span>🔥</span> PyTorch &amp; Deep Learning
+          </div>
+          <div class="skill-orb" style="top: 100%; left: 50%;" data-tech-id="agents">
+            <span>🤖</span> Agent Protocols (agent.md)
+          </div>
+          <div class="skill-orb" style="top: 50%; left: 100%;" data-tech-id="llm">
+            <span>🧠</span> LLM &amp; RAG Systems
+          </div>
+        </div>
+
+        <!-- Middle Orbit (Privacy & Systems) -->
+        <div class="orbit-ring ring-2">
+          <div class="skill-orb" style="top: 15%; left: 15%;" data-tech-id="privacy">
+            <span>🛡️</span> Local Privacy Firewalls
+          </div>
+          <div class="skill-orb" style="top: 85%; left: 85%;" data-tech-id="python">
+            <span>🐍</span> Python Async &amp; FastAPI
+          </div>
+          <div class="skill-orb" style="top: 85%; left: 15%;" data-tech-id="onnx">
+            <span>⚡</span> ONNX &amp; Edge Inference
+          </div>
+        </div>
+
+        <!-- Outer Orbit (Platforms & Research) -->
+        <div class="orbit-ring ring-3">
+          <div class="skill-orb" style="top: 5%; left: 50%;" data-tech-id="kotlin">
+            <span>📱</span> Kotlin &amp; Android Native
+          </div>
+          <div class="skill-orb" style="top: 95%; left: 50%;" data-tech-id="typescript">
+            <span>🌐</span> TypeScript &amp; 3D Web
+          </div>
+          <div class="skill-orb" style="top: 50%; left: 0%;" data-tech-id="federated">
+            <span>🧬</span> Federated Learning &amp; GNNs
+          </div>
+        </div>
+      </div>
+
+      <!-- Capability Cards Grid (Visible on all devices) -->
+      <div class="grid sm:grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
+        <div class="project-card">
+          <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-xl mb-4 border border-orange-500/30">
+            🤖
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Autonomous AI &amp; Agents</h3>
+          <p class="text-sm text-white/60 leading-relaxed mb-4">Architecting self-consistent agent runtimes, tool protocols (agent.md, TRUST.md), and multi-step reasoning systems.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="pytorch">🔥 PyTorch</span>
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="agents">🤖 agent.md</span>
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="llm">🧠 RAG &amp; Gemini</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-xl mb-4 border border-orange-500/30">
+            🛡️
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Privacy &amp; Zero-Cloud Security</h3>
+          <p class="text-sm text-white/60 leading-relaxed mb-4">Building on-device neural firewalls, synthetic PII tokenization, and differential privacy federated learning pipelines.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="privacy">🛡️ privorai</span>
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="federated">🧬 Federated ML</span>
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="onnx">⚡ On-Device</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-xl mb-4 border border-orange-500/30">
+            ⚡
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Edge Systems &amp; Platforms</h3>
+          <p class="text-sm text-white/60 leading-relaxed mb-4">High-throughput Python asyncio CLIs, native Android Kotlin safety daemons, and reactive 3D interfaces.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="python">🐍 Python Async</span>
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="kotlin">📱 Kotlin Native</span>
+            <span class="lang-pill text-xs orbit-badge-btn" data-tech-id="typescript">🌐 Three.js Web</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 3. THE IDEA CONSTELLATION & MASTER INVENTORY ========== -->
+  <section id="ideas" class="py-28 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          Master Inventory · 53 Inventions &amp; Research Directions
+        </div>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+          The Idea <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">Constellation</span>
+        </h2>
+        <p class="text-white/60 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          A living celestial map of 53 computational architectures, hardware inventions, social systems, quantitative engines, and frontier research blueprints. Hover any star to view its telemetry, or click to warp directly to its technical dossier below.
+        </p>
+      </div>
+
+      <!-- Constellation Celestial Observatory Box -->
+      <div class="constellation-viewport-card mb-16 relative">
+        <!-- Constellation Controls & Cluster Filters -->
+        <div class="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5 border-b border-white/10 bg-black/30 backdrop-blur-sm rounded-t-2xl">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-300 font-semibold">Sector: Cosmic Constellation Map</span>
+          </div>
+          <div class="flex flex-wrap gap-2 text-xs" id="constellation-cluster-filters">
+            <button class="cluster-btn active" data-cluster="all">All 53 Stars</button>
+            <button class="cluster-btn" data-cluster="core">✦ Core Breakthroughs</button>
+            <button class="cluster-btn" data-cluster="deep-tech">⚡ Deep Computing</button>
+            <button class="cluster-btn" data-cluster="software">🛠️ Software Products</button>
+            <button class="cluster-btn" data-cluster="business">🌐 Platforms &amp; Ventures</button>
+            <button class="cluster-btn" data-cluster="frontier">🧬 Frontier Science</button>
+            <button class="cluster-btn" data-cluster="frameworks">📜 Research Blueprints</button>
+          </div>
+        </div>
+
+        <!-- Interactive SVG Celestial Map -->
+        <div class="constellation-svg-container relative overflow-hidden" id="constellation-svg-wrapper">
+          <svg id="constellation-svg" viewBox="0 0 1100 620" preserveAspectRatio="xMidYMid meet" class="w-full h-auto select-none">
+            <defs>
+              <!-- Nebular Gradients (Transparent overlay) -->
+              <radialGradient id="nebula-gold" cx="30%" cy="30%" r="60%">
+                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.10" />
+                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="nebula-cyan" cx="20%" cy="70%" r="50%">
+                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.08" />
+                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="nebula-purple" cx="80%" cy="25%" r="60%">
+                <stop offset="0%" stop-color="#c084fc" stop-opacity="0.09" />
+                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="nebula-rose" cx="75%" cy="75%" r="55%">
+                <stop offset="0%" stop-color="#fb7185" stop-opacity="0.08" />
+                <stop offset="100%" stop-color="#06060a" stop-opacity="0" />
+              </radialGradient>
+              <!-- Star Glow Filter -->
+              <filter id="star-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Transparent Celestial Glows over Black Hole -->
+            <circle cx="320" cy="180" r="260" fill="url(#nebula-gold)" />
+            <circle cx="200" cy="450" r="240" fill="url(#nebula-cyan)" />
+            <circle cx="750" cy="180" r="260" fill="url(#nebula-purple)" />
+            <circle cx="740" cy="460" r="230" fill="url(#nebula-rose)" />
+
+            <!-- Celestial Grid markings -->
+            <line x1="0" y1="310" x2="1100" y2="310" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 6" />
+            <line x1="550" y1="0" x2="550" y2="620" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 6" />
+
+            <!-- Dynamic Constellation Lines -->
+            <g id="constellation-lines"></g>
+
+            <!-- Dynamic Constellation Star Nodes -->
+            <g id="constellation-stars"></g>
+          </svg>
+
+          <!-- Floating Interactive HUD Tooltip -->
+          <div id="star-hud-tooltip" class="star-hud-tooltip opacity-0 pointer-events-none transition-opacity duration-200">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="hud-rank font-mono text-xs font-bold text-amber-300">#1</span>
+              <span class="hud-type text-[10px] uppercase font-semibold text-white/50 tracking-wider">Research</span>
+            </div>
+            <h4 class="hud-title text-sm font-bold text-white mb-1 leading-snug">AEON Architecture</h4>
+            <p class="hud-desc text-xs text-white/70 line-clamp-2 leading-relaxed mb-2">Efficient AI computing architecture through adaptive routing.</p>
+            <div class="text-[10px] text-amber-400 font-mono font-medium flex items-center gap-1">
+              <span>Click to warp to dossier</span>
+              <span>↓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Constellation Hint Footer -->
+        <div class="flex items-center justify-between px-5 py-3 bg-black/25 backdrop-blur-sm border-t border-white/5 text-xs text-white/50">
+          <span>✦ 53 Coordinates Plotted across 6 Stellar Clusters</span>
+          <span>Click any star to warp to detailed dossier</span>
+        </div>
+      </div>
+
+      <!-- Master Inventory Header & Search -->
+      <div class="mb-10" id="ideas-inventory-header">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+          <div>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-2">Technical Dossier Directory</h3>
+            <p class="text-sm text-white/60">Complete inventory of 53 concepts ranked by real-world impact, originality, and engineering depth.</p>
+          </div>
+          <!-- Search Bar -->
+          <div class="relative w-full md:w-80">
+            <input type="text" id="ideas-search" placeholder="Search 53 ideas..."
+                   class="w-full px-4 py-2.5 pl-10 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 text-sm focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition">
+            <svg class="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <span id="ideas-count" class="text-xs text-amber-300 font-mono absolute right-3 top-3">53 ideas</span>
+          </div>
+        </div>
+
+        <!-- Filter Pills for Cards -->
+        <div class="flex flex-wrap gap-2" id="ideas-card-filters">
+          <button class="filter-btn active text-xs py-1.5 px-3.5" data-filter="all">All (53)</button>
+          <button class="filter-btn text-xs py-1.5 px-3.5" data-filter="core">✦ Core Breakthroughs (10)</button>
+          <button class="filter-btn text-xs py-1.5 px-3.5" data-filter="deep-tech">⚡ Deep Computing (10)</button>
+          <button class="filter-btn text-xs py-1.5 px-3.5" data-filter="software">🛠️ Software Products (8)</button>
+          <button class="filter-btn text-xs py-1.5 px-3.5" data-filter="business">🌐 Platforms &amp; Ventures (6)</button>
+          <button class="filter-btn text-xs py-1.5 px-3.5" data-filter="frontier">🧬 Frontier Science (14)</button>
+          <button class="filter-btn text-xs py-1.5 px-3.5" data-filter="frameworks">📜 Research Blueprints (5)</button>
+        </div>
+      </div>
+
+      <!-- 53 Ideas Bento Grid Container -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="ideas-cards-grid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TOP 10 ========== -->
+  <section id="top10" class="py-24 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">Ranked Showcase</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Top 10 Projects</h2>
+        <p class="text-white/50 max-w-xl mx-auto">Ordered by impact, originality, technical depth and community signal. Click any card to inspect its system architecture.</p>
+      </div>
+
+      <div class="grid gap-8" id="top-projects-grid">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FULL ARCHIVE ========== -->
+  <section id="archive" class="py-32 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">Complete Collection</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">All Public Repositories</h2>
+        <p class="text-white/50">Every public project, ranked and organized.</p>
+      </div>
+
+      <!-- Filter pills -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Python">Python</button>
+        <button class="filter-btn" data-filter="JavaScript">JavaScript</button>
+        <button class="filter-btn" data-filter="TypeScript">TypeScript</button>
+        <button class="filter-btn" data-filter="Kotlin">Kotlin</button>
+        <button class="filter-btn" data-filter="AI">AI / Agents</button>
+        <button class="filter-btn" data-filter="Privacy">Privacy</button>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="all-repos-grid">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="py-32 px-6 relative">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">Let’s Connect</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mb-6">Building something together?</h2>
+      <p class="text-white/70 text-lg mb-12">Open to collaborations, research ideas, and interesting AI systems work.</p>
+      
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener"
+           class="px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold hover:scale-105 transition shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 flex items-center gap-3">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn Profile
+        </a>
+        <a href="https://github.com/udaydomadiya08" target="_blank" rel="noopener"
+           class="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold hover:scale-105 transition flex items-center gap-3 backdrop-blur">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
+      <p>© 2026 Uday Domadiya. Built with passion.</p>
+      <div class="flex items-center gap-6">
+        <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener" class="hover:text-amber-400 transition">LinkedIn</a>
+        <a href="https://github.com/udaydomadiya08" target="_blank" rel="noopener" class="hover:text-amber-400 transition">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== 1. SINGULARITY TERMINAL MODAL ========== -->
+  <div id="terminal-modal">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="terminal-dot dot-red"></span>
+          <span class="terminal-dot dot-yellow"></span>
+          <span class="terminal-dot dot-green"></span>
+        </div>
+        <div class="terminal-title">uday@singularity: ~ (zsh) — 80x24</div>
+        <button class="terminal-close" id="terminal-close-btn" aria-label="Close Terminal">✕</button>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-output text-orange-400 font-semibold mb-3">
+╔═════════════════════════════════════════════════════════════════════════╗
+║   UDAY DOMADIYA — SINGULARITY RUNTIME [v2.6]                            ║
+║   AI Systems • Autonomous Agents • Privacy-First Architecture           ║
+╚═════════════════════════════════════════════════════════════════════════╝</div>
+        <div class="terminal-output text-white/60 mb-3">Type <span class="text-amber-300 font-semibold">'help'</span> for a list of available commands, or <span class="text-amber-300 font-semibold">'projects'</span> to view ranked repos.</div>
+        <div id="terminal-history"></div>
+        <div class="terminal-input-row mt-2">
+          <span class="terminal-prompt">visitor@singularity:~$</span>
+          <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Terminal HUD Button -->
+  <button id="terminal-trigger-btn" class="fixed bottom-6 right-6 z-40 px-4 py-2.5 rounded-full bg-[#0d0a16]/90 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white font-mono text-xs flex items-center gap-2.5 shadow-xl shadow-orange-500/20 backdrop-blur-md transition-all hover:scale-105 group" aria-label="Open Terminal HUD">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span class="text-orange-400 font-bold">&gt;_</span>
+    <span class="font-medium">Terminal CLI</span>
+    <span class="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white/60 hidden sm:inline">`</span>
+  </button>
+
+  <!-- ========== 3. ARCHITECTURE DEEP-DIVE MODAL ========== -->
+  <div id="project-modal">
+    <div class="modal-content-card" id="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Modal">✕</button>
+      
+      <div class="flex items-center gap-3 mb-4">
+        <span id="modal-rank" class="px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-sm shadow-orange-500/30">#1</span>
+        <span id="modal-lang" class="lang-pill text-xs">Python</span>
+        <span id="modal-highlight" class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Production-ready</span>
+      </div>
+
+      <h2 id="modal-title" class="font-display text-2xl sm:text-3xl font-bold text-white mb-3">Project Title</h2>
+      <p id="modal-desc" class="text-white/70 text-sm sm:text-base leading-relaxed mb-6">Description goes here.</p>
+
+      <!-- Architecture Flowchart Pipeline -->
+      <div class="mb-6">
+        <h4 class="text-xs uppercase tracking-widest text-orange-400 font-bold mb-3 flex items-center gap-2">
+          <span>⚡</span> System Architecture Pipeline
+        </h4>
+        <div id="modal-pipeline" class="pipeline-track">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Key Challenges & Engineering -->
+      <div class="p-4 rounded-xl bg-white/[0.03] border border-orange-500/20 mb-6">
+        <h4 class="text-xs uppercase tracking-widest text-amber-300 font-bold mb-1.5 flex items-center gap-2">
+          <span>💡</span> Key Technical Challenge Solved
+        </h4>
+        <p id="modal-challenges" class="text-xs sm:text-sm text-white/70 leading-relaxed"></p>
+      </div>
+
+      <!-- Tech Stack Tags -->
+      <div class="mb-8">
+        <h4 class="text-xs uppercase tracking-widest text-white/50 font-bold mb-2">Technologies &amp; Modules</h4>
+        <div id="modal-tech-tags" class="flex flex-wrap gap-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
+        <a id="modal-github-link" href="#" target="_blank" rel="noopener"
+           class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold text-sm hover:scale-105 transition shadow-lg shadow-orange-500/20 flex items-center gap-2">
+          View on GitHub ↗
+        </a>
+        <button id="modal-copy-btn" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white/80 hover:text-white text-sm font-medium transition flex items-center gap-2">
+          <span>📋</span> <span id="copy-text">Copy Git Clone</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
