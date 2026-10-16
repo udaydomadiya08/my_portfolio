@@ -118,6 +118,7 @@ my_portfolio/
 
 **Uday Domadiya**
 - **Email:** [udaydomadiya08@gmail.com](mailto:udaydomadiya08@gmail.com)
+- **WhatsApp:** [+91 8200936149](https://wa.me/918200936149)
 - **GitHub:** [@udaydomadiya08](https://github.com/udaydomadiya08)
 - **LinkedIn:** [linkedin.com/in/udaydomadiya08](https://www.linkedin.com/in/udaydomadiya08)
 - **Education:** Institute of Technology (B.Tech CSE) & Institute of Management (MBA Finance & Digital Transformation & Analytics), Nirma University.
