@@ -1,4 +1,4 @@
-# Uday Domadiya — Singularity & Idea Constellation Portfolio
+# Uday Domadiya — Portfolio
 
 A high-performance, cinematic **Interactive 3D Black Hole & Celestial Constellation Portfolio** for **Uday Domadiya** — AI Systems Engineer & Quantitative Strategist (Dual Background in Computer Science Engineering and Finance & Digital Transformation & Analytics, Nirma University).
 
