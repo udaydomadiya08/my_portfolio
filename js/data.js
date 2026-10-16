@@ -633,7 +633,7 @@ const RESUME_JOURNEY = [
     tech: ["Data Structures & Algorithms", "Operating Systems", "Neural Networks", "Distributed Systems"]
   },
   {
-    period: "Competition",
+    period: "Oct 2024",
     role: "Exoplanet Detection AI Model",
     organization: "NASA Space Apps Challenge",
     category: "research",
@@ -647,7 +647,7 @@ const RESUME_JOURNEY = [
     tech: ["NASA Observational Data", "Python", "Deep Learning", "Transit Photometry"]
   },
   {
-    period: "Competition",
+    period: "Feb 2024",
     role: "Multimodal Research Synthesizer",
     organization: "MINeD Hackathon",
     category: "research",

@@ -596,33 +596,160 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========== RENDER RESUME JOURNEY ==========
+  // ========== RENDER RESUME JOURNEY (INTERACTIVE COSMIC TIMELINE) ==========
   const journeyGrid = document.getElementById('journey-cards-grid');
   if (journeyGrid && typeof RESUME_JOURNEY !== 'undefined') {
-    RESUME_JOURNEY.forEach((item, idx) => {
-      const card = document.createElement('div');
-      card.className = 'timeline-card flex flex-col';
-      card.dataset.category = item.category;
+    function getCategoryMeta(cat) {
+      switch(cat) {
+        case 'industry':
+          return {
+            label: 'Industry & Experience',
+            badgeClass: 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
+            dotColor: 'bg-amber-400',
+            icon: '💼',
+            glowGradient: 'bg-amber-500'
+          };
+        case 'education':
+          return {
+            label: 'Academic Foundation',
+            badgeClass: 'bg-sky-500/15 text-sky-300 border border-sky-500/30',
+            dotColor: 'bg-sky-400',
+            icon: '🎓',
+            glowGradient: 'bg-sky-500'
+          };
+        case 'research':
+          return {
+            label: 'AI Research & Hackathon',
+            badgeClass: 'bg-rose-500/15 text-rose-300 border border-rose-500/30',
+            dotColor: 'bg-rose-400',
+            icon: '🚀',
+            glowGradient: 'bg-rose-500'
+          };
+        default:
+          return {
+            label: 'Milestone',
+            badgeClass: 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
+            dotColor: 'bg-amber-400',
+            icon: '✦',
+            glowGradient: 'bg-amber-500'
+          };
+      }
+    }
 
-      card.innerHTML = `
-        <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
-          <span class="timeline-tag-pill">${item.period}</span>
-          <span class="text-xs text-amber-300 font-mono font-medium">${item.badge}</span>
-        </div>
-        <h3 class="font-display text-xl font-bold text-white mb-1">${item.role}</h3>
-        <p class="text-sm text-orange-400 font-semibold mb-3">${item.organization}</p>
-        <p class="text-sm text-white/70 leading-relaxed mb-4">${item.description}</p>
+    function renderTimeline(filter = 'all') {
+      journeyGrid.innerHTML = '';
+      
+      const filteredItems = RESUME_JOURNEY.filter(item => filter === 'all' || item.category === filter);
+
+      filteredItems.forEach((item, idx) => {
+        const side = idx % 2 === 0 ? 'left' : 'right';
+        const meta = getCategoryMeta(item.category);
         
-        <ul class="space-y-2 mb-5 text-xs sm:text-sm text-white/60">
-          ${item.highlights.map(h => `<li class="flex items-start gap-2"><span class="text-orange-400 mt-1">▸</span><span>${h}</span></li>`).join('')}
-        </ul>
+        const entry = document.createElement('div');
+        entry.className = `timeline-item timeline-side-${side}`;
+        entry.dataset.category = item.category;
 
-        <div class="flex flex-wrap gap-2 pt-3 border-t border-white/5 mt-auto">
-          ${item.tech.map(t => `<span class="lang-pill text-[11px]">${t}</span>`).join('')}
-        </div>
-      `;
-      journeyGrid.appendChild(card);
-    });
+        entry.innerHTML = `
+          <!-- Center Node on Vertical Spine -->
+          <div class="timeline-marker" title="${item.period} · ${item.role}">
+            <div class="timeline-marker-pulse"></div>
+            <div class="timeline-marker-orb ${item.category}">
+              <span>${meta.icon}</span>
+            </div>
+          </div>
+
+          <!-- Horizontal Branch Connector -->
+          <div class="timeline-branch"></div>
+
+          <!-- Main Dossier Card -->
+          <div class="timeline-card-wrapper">
+            <div class="timeline-card group">
+              <div class="timeline-card-glow ${meta.glowGradient}"></div>
+
+              <!-- Top Row: Date Pill & Status / Badge -->
+              <div class="flex items-center justify-between gap-2.5 mb-3.5 flex-wrap">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="timeline-tag-pill inline-flex items-center gap-1.5 font-mono shrink-0 whitespace-nowrap">
+                    <span class="w-1.5 h-1.5 rounded-full ${meta.dotColor} animate-pulse shrink-0"></span>
+                    <span>${item.period}</span>
+                  </span>
+                  <span class="text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full font-medium shrink-0 whitespace-nowrap ${meta.badgeClass}">
+                    ${meta.label}
+                  </span>
+                </div>
+                <span class="text-[11px] sm:text-xs text-amber-300 font-mono font-semibold bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 shadow-sm shrink-0 whitespace-nowrap">
+                  ${item.badge}
+                </span>
+              </div>
+
+              <!-- Role / Title -->
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-1.5 tracking-tight group-hover:text-amber-200 transition-colors">
+                ${item.role}
+              </h3>
+
+              <!-- Organization & Impact Metric Row -->
+              <div class="flex items-center justify-between gap-2 mb-3.5 flex-wrap">
+                <div class="flex items-center gap-1.5 text-sm font-semibold text-orange-400">
+                  <svg class="w-4 h-4 text-orange-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                  <span>${item.organization}</span>
+                </div>
+                ${item.metric ? `
+                  <div class="text-[11px] font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <span>⚡</span> ${item.metric}
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Description -->
+              <p class="text-sm text-white/70 leading-relaxed mb-4">
+                ${item.description}
+              </p>
+
+              <!-- Key Accomplishments / Deliverables Bullet Points -->
+              <ul class="space-y-2 mb-5 text-xs sm:text-sm text-white/60">
+                ${item.highlights.map(h => `
+                  <li class="flex items-start gap-2.5 leading-relaxed">
+                    <span class="text-amber-400 mt-1 shrink-0 font-bold text-xs">▸</span>
+                    <span>${h}</span>
+                  </li>
+                `).join('')}
+              </ul>
+
+              <!-- Tech Stack Badges -->
+              <div class="flex flex-wrap gap-2 pt-3.5 border-t border-white/10 mt-auto">
+                ${item.tech.map(t => `<span class="lang-pill text-[11px] font-medium tracking-wide">${t}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Opposite Side Floating Date Callout (Desktop Only) -->
+          <div class="timeline-opposite-callout hidden md:flex">
+            <div class="timeline-callout-inner">
+              <div class="text-xs uppercase tracking-widest text-amber-400 font-mono font-bold mb-1">${item.period}</div>
+              <div class="text-sm font-display font-medium text-white/85 leading-snug">${item.role}</div>
+              <div class="text-xs text-white/50 mt-1">${item.organization}</div>
+              ${item.metric ? `<div class="text-[10px] font-mono text-emerald-400/90 mt-1.5 flex items-center gap-1"><span>⚡</span> ${item.metric}</div>` : ''}
+            </div>
+          </div>
+        `;
+
+        journeyGrid.appendChild(entry);
+      });
+
+      // Quick GSAP smooth entrance if GSAP is available
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(
+          journeyGrid.querySelectorAll('.timeline-item'),
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.35, stagger: 0.06, ease: 'power2.out' }
+        );
+      }
+    }
+
+    // Initial render
+    renderTimeline('all');
 
     // Journey filters
     const jFilterBtns = document.querySelectorAll('.journey-btn');
@@ -631,15 +758,7 @@ document.addEventListener('DOMContentLoaded', () => {
         jFilterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.jfilter;
-
-        document.querySelectorAll('.timeline-card').forEach(card => {
-          const cat = card.dataset.category;
-          if (filter === 'all' || cat === filter) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+        renderTimeline(filter);
       });
     });
   }

@@ -217,15 +217,42 @@
 
       <!-- Journey Category Filter Tabs -->
       <div class="flex items-center justify-start sm:justify-center gap-2.5 overflow-x-auto pb-2 max-w-full scrollbar-none no-scrollbar mb-12" id="journey-filters">
-        <button class="journey-btn active shrink-0" data-jfilter="all">All Milestones</button>
-        <button class="journey-btn shrink-0" data-jfilter="industry">Industry &amp; Internships</button>
-        <button class="journey-btn shrink-0" data-jfilter="research">AI Research &amp; Hackathons</button>
-        <button class="journey-btn shrink-0" data-jfilter="education">Academic Foundations</button>
+        <button class="journey-btn active shrink-0 flex items-center gap-2" data-jfilter="all">
+          <span>All Milestones</span>
+          <span class="text-[11px] opacity-80 font-mono bg-white/10 px-2 py-0.5 rounded-full">6</span>
+        </button>
+        <button class="journey-btn shrink-0 flex items-center gap-2" data-jfilter="industry">
+          <span>💼 Industry &amp; Internships</span>
+          <span class="text-[11px] opacity-80 font-mono bg-white/10 px-2 py-0.5 rounded-full">2</span>
+        </button>
+        <button class="journey-btn shrink-0 flex items-center gap-2" data-jfilter="education">
+          <span>🎓 Academic Foundations</span>
+          <span class="text-[11px] opacity-80 font-mono bg-white/10 px-2 py-0.5 rounded-full">2</span>
+        </button>
+        <button class="journey-btn shrink-0 flex items-center gap-2" data-jfilter="research">
+          <span>🚀 AI Research &amp; Hackathons</span>
+          <span class="text-[11px] opacity-80 font-mono bg-white/10 px-2 py-0.5 rounded-full">2</span>
+        </button>
       </div>
 
-      <!-- Timeline Bento Grid -->
-      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto" id="journey-cards-grid">
-        <!-- Rendered dynamically by JS from RESUME_JOURNEY -->
+      <!-- Interactive Cosmic Timeline -->
+      <div class="timeline-wrapper max-w-5xl mx-auto" id="journey-timeline">
+        <!-- Central Luminous Spine Track -->
+        <div class="timeline-spine-track" id="timeline-spine-track">
+          <div class="timeline-spine-glow"></div>
+          <div class="timeline-spine-cap top" title="Horizon · Upcoming &amp; Present">
+            <span class="timeline-beacon-pulse"></span>
+            <span class="timeline-beacon-core"></span>
+          </div>
+          <div class="timeline-spine-cap bottom" title="Genesis · Engineering Foundations">
+            <span class="timeline-anchor-core"></span>
+          </div>
+        </div>
+
+        <!-- Timeline Entries Container -->
+        <div class="timeline-entries" id="journey-cards-grid">
+          <!-- Rendered dynamically by JS from RESUME_JOURNEY -->
+        </div>
       </div>
     </div>
   </section>
