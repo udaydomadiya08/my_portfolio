@@ -1237,7 +1237,7 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
   const timelineSidebar = document.getElementById('timeline-sidebar');
   if (timelineSidebar) {
     const navItems = Array.from(timelineSidebar.querySelectorAll('.timeline-nav-item'));
-    const spineTrack = timelineSidebar.querySelector('.timeline-spine-track');
+    const spineTrack = timelineSidebar.querySelector('.sidebar-spine-track');
     const spineProgress = document.getElementById('timeline-spine-progress');
 
     const trackedSections = navItems.map(item => {

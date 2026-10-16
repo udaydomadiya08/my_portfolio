@@ -1616,7 +1616,7 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
   padding-left: 0.25rem;
 }
 
-.timeline-spine-track {
+.sidebar-spine-track {
   position: absolute;
   left: 8px;
   top: 36px;
@@ -1628,7 +1628,7 @@ button, a, .cluster-btn, .filter-btn, .journey-btn, .skill-orb, .constellation-s
   z-index: 1;
 }
 
-.timeline-spine-fill {
+.sidebar-spine-fill {
   position: absolute;
   left: 8px;
   top: 36px;
