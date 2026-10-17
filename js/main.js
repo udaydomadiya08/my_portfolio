@@ -2,6 +2,49 @@
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
+  // ========== BUTTER-SMOOTH LENIS MOMENTUM SCROLL ENGINE ==========
+  let lenis = null;
+  if (typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.05,
+      touchMultiplier: 1.5,
+      infinite: false,
+    });
+    window.lenis = lenis;
+
+    if (window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+  }
+
+  // Global smooth scroll helper with navbar offset
+  window.smoothScrollTo = function(target, offset = -70) {
+    if (lenis) {
+      lenis.scrollTo(target, { offset: offset, duration: 1.15 });
+    } else {
+      const el = typeof target === 'string' ? document.querySelector(target) : target;
+      if (el) {
+        const top = el.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) + offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }
+  };
+
   // ========== VIDEO BACKGROUND AUTOPLAY CHECK ==========
   const bgVideo = document.getElementById('bg-video');
   if (bgVideo) {
@@ -306,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Smoothly redirect/scroll to the filtered archive section
       const archiveSection = document.getElementById('archive');
       if (archiveSection) {
-        archiveSection.scrollIntoView({ behavior: 'smooth' });
+        window.smoothScrollTo(archiveSection, -70);
       }
     });
   });
@@ -318,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (allBtn) allBtn.click();
       const archiveSection = document.getElementById('archive');
       if (archiveSection) {
-        archiveSection.scrollIntoView({ behavior: 'smooth' });
+        window.smoothScrollTo(archiveSection, -70);
       }
     });
   }
@@ -486,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Smooth scroll to card
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.smoothScrollTo(card, -120);
 
       // Trigger pulse warp animation
       card.classList.remove('highlight-warp');
@@ -567,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const starEl = document.getElementById(`svg-star-${starId}`);
           const constSec = document.getElementById('constellation-svg-wrapper');
           if (constSec) {
-            constSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            window.smoothScrollTo(constSec, -70);
           }
           if (starEl) {
             starEl.dispatchEvent(new MouseEvent('mouseenter'));
@@ -816,6 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.classList.add('active');
         const filter = btn.dataset.jfilter;
         renderTimeline(filter);
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 150);
       });
     });
   }
@@ -1260,7 +1304,7 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
     orbitObserver.observe(stackSection);
   }
 
-  // Smooth scroll handler for anchor links (prevents global CSS smooth scroll fight)
+  // Smooth scroll handler for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -1268,7 +1312,8 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
+        window.smoothScrollTo(target, -70);
+        if (history.pushState) history.pushState(null, null, targetId);
       }
     });
   });
@@ -1315,42 +1360,54 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
       };
     }).filter(s => s.el !== null);
 
-    function updateSpinePositions(activeIndex) {
+    let diamondPositions = [];
+    let spineTopOffset = 0;
+    let spineTotalHeight = 0;
+    let spineCenterX = 0;
+    let currentActiveSectionId = null;
+
+    function measureSidebarGeometry() {
       if (!navItems.length) return;
+      const panel = timelineSidebar.querySelector('.timeline-sidebar-panel');
       const firstDiamond = navItems[0].querySelector('.timeline-diamond-box');
       const lastDiamond = navItems[navItems.length - 1].querySelector('.timeline-diamond-box');
-      const panel = timelineSidebar.querySelector('.timeline-sidebar-panel');
-      if (!firstDiamond || !lastDiamond || !panel) return;
+      if (!panel || !firstDiamond || !lastDiamond) return;
 
       const panelRect = panel.getBoundingClientRect();
       const firstRect = firstDiamond.getBoundingClientRect();
       const lastRect = lastDiamond.getBoundingClientRect();
 
-      const topOffset = (firstRect.top + firstRect.height / 2) - panelRect.top;
-      const totalTrackHeight = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
-      const firstDiamondCenter = (firstRect.left + firstRect.width / 2) - panelRect.left;
+      spineTopOffset = (firstRect.top + firstRect.height / 2) - panelRect.top;
+      spineTotalHeight = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
+      spineCenterX = (firstRect.left + firstRect.width / 2) - panelRect.left;
+
+      diamondPositions = navItems.map(item => {
+        const diamond = item.querySelector('.timeline-diamond-box');
+        if (!diamond) return 0;
+        const dRect = diamond.getBoundingClientRect();
+        return (dRect.top + dRect.height / 2) - (firstRect.top + firstRect.height / 2);
+      });
 
       if (spineTrack) {
-        spineTrack.style.left = `${firstDiamondCenter - 1}px`;
-        spineTrack.style.top = `${topOffset}px`;
-        spineTrack.style.height = `${Math.max(0, totalTrackHeight)}px`;
+        spineTrack.style.left = `${spineCenterX - 1}px`;
+        spineTrack.style.top = `${spineTopOffset}px`;
+        spineTrack.style.height = `${Math.max(0, spineTotalHeight)}px`;
         spineTrack.style.bottom = 'auto';
-      }
-
-      if (spineProgress) {
-        const safeActiveIdx = Math.max(0, Math.min(activeIndex, navItems.length - 1));
-        const activeDiamond = navItems[safeActiveIdx].querySelector('.timeline-diamond-box');
-        if (activeDiamond) {
-          const activeRect = activeDiamond.getBoundingClientRect();
-          const progressHeight = Math.max(0, (activeRect.top + activeRect.height / 2) - (firstRect.top + firstRect.height / 2));
-          spineProgress.style.left = `${firstDiamondCenter - 1}px`;
-          spineProgress.style.top = `${topOffset}px`;
-          spineProgress.style.height = `${progressHeight}px`;
-        }
       }
     }
 
+    function updateSpineProgress(activeIndex) {
+      if (!spineProgress || !diamondPositions.length) return;
+      const safeIdx = Math.max(0, Math.min(activeIndex, diamondPositions.length - 1));
+      const progressHeight = Math.max(0, diamondPositions[safeIdx]);
+      spineProgress.style.left = `${spineCenterX - 1}px`;
+      spineProgress.style.top = `${spineTopOffset}px`;
+      spineProgress.style.height = `${progressHeight}px`;
+    }
+
     function setActiveTimelineItem(sectionId) {
+      if (sectionId === currentActiveSectionId) return; // ZERO DOM writes if unchanged
+      currentActiveSectionId = sectionId;
       let activeIndex = 0;
       navItems.forEach((item, idx) => {
         if (item.dataset.section === sectionId) {
@@ -1360,7 +1417,29 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
           item.classList.remove('active');
         }
       });
-      updateSpinePositions(activeIndex);
+      updateSpineProgress(activeIndex);
+    }
+
+    // Cache section document positions to avoid getBoundingClientRect layout thrashing during scroll
+    let sectionBounds = [];
+    function measureSectionBounds() {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      sectionBounds = trackedSections.map(s => {
+        const rect = s.el.getBoundingClientRect();
+        const top = rect.top + scrollY;
+        return {
+          id: s.id,
+          top: top,
+          bottom: top + s.el.offsetHeight
+        };
+      });
+    }
+
+    function refreshAllGeometry() {
+      measureSidebarGeometry();
+      measureSectionBounds();
+      const activeIdx = navItems.findIndex(item => item.classList.contains('active'));
+      updateSpineProgress(activeIdx >= 0 ? activeIdx : 0);
     }
 
     // Click handler for smooth scrolling
@@ -1370,12 +1449,7 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
         const sectionId = item.dataset.section;
         const targetEl = document.getElementById(sectionId);
         if (targetEl) {
-          const navbarHeight = 70;
-          const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-          window.scrollTo({
-            top: targetTop,
-            behavior: 'smooth'
-          });
+          window.smoothScrollTo(targetEl, -70);
           if (history.pushState) {
             history.pushState(null, null, `#${sectionId}`);
           }
@@ -1384,41 +1458,57 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
       });
     });
 
-    // Scroll listener to update active section
-    function onScrollSpy() {
-      const scrollPos = window.pageYOffset;
+    // Zero-reflow Scroll Spy
+    function onScrollSpy(scrollY) {
+      const scrollPos = typeof scrollY === 'number' ? scrollY : (window.pageYOffset || document.documentElement.scrollTop);
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
 
-      if (scrollPos + windowHeight >= docHeight - 50 && trackedSections.length > 0) {
+      if (scrollPos + windowHeight >= docHeight - 60 && trackedSections.length > 0) {
         setActiveTimelineItem(trackedSections[trackedSections.length - 1].id);
         return;
       }
 
-      let currentSectionId = trackedSections[0]?.id || 'hero';
-      for (let i = 0; i < trackedSections.length; i++) {
-        const rect = trackedSections[i].el.getBoundingClientRect();
-        if (rect.top <= windowHeight * 0.45 && rect.bottom >= windowHeight * 0.15) {
-          currentSectionId = trackedSections[i].id;
+      const triggerPoint = scrollPos + windowHeight * 0.35;
+      let activeId = trackedSections[0]?.id || 'hero';
+
+      for (let i = 0; i < sectionBounds.length; i++) {
+        const sec = sectionBounds[i];
+        if (triggerPoint >= sec.top && triggerPoint <= sec.bottom) {
+          activeId = sec.id;
+          break;
+        } else if (triggerPoint > sec.bottom) {
+          activeId = sec.id;
         }
       }
 
-      setActiveTimelineItem(currentSectionId);
+      setActiveTimelineItem(activeId);
     }
 
-    let isScrollTicking = false;
-    window.addEventListener('scroll', () => {
-      if (!isScrollTicking) {
-        window.requestAnimationFrame(() => {
-          onScrollSpy();
-          isScrollTicking = false;
-        });
-        isScrollTicking = true;
-      }
-    }, { passive: true });
+    if (lenis) {
+      lenis.on('scroll', (e) => {
+        onScrollSpy(e.scroll);
+      });
+    } else {
+      let isScrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (!isScrollTicking) {
+          window.requestAnimationFrame(() => {
+            onScrollSpy();
+            isScrollTicking = false;
+          });
+          isScrollTicking = true;
+        }
+      }, { passive: true });
+    }
 
     window.addEventListener('resize', () => {
+      refreshAllGeometry();
       onScrollSpy();
+    });
+
+    window.addEventListener('load', () => {
+      refreshAllGeometry();
     });
 
     const toggleBtn = document.getElementById('timeline-toggle-btn');
@@ -1426,15 +1516,17 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
       toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         timelineSidebar.classList.toggle('collapsed');
-        const activeIdx = navItems.findIndex(item => item.classList.contains('active'));
-        updateSpinePositions(activeIdx >= 0 ? activeIdx : 0);
+        setTimeout(() => {
+          refreshAllGeometry();
+        }, 60);
       });
     }
 
-    // Initialize
+    // Initial measurement
     setTimeout(() => {
+      refreshAllGeometry();
       onScrollSpy();
-    }, 150);
+    }, 120);
   }
 
   // Copy Email Button in Contact Section
