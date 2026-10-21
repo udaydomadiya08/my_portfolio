@@ -45,6 +45,165 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // ========== CINEMATIC PRELOADER (R9 / O2) ==========
+  const preloader = document.getElementById('preloader');
+  const preloaderCounter = document.getElementById('preloader-counter');
+  const preloaderProgress = document.getElementById('preloader-progress');
+
+  if (preloader && preloaderCounter) {
+    let count = 0;
+    const startTime = performance.now();
+    const duration = 950;
+
+    function stepPreloader(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / duration);
+      const ease = 1 - Math.pow(1 - t, 3);
+      count = Math.floor(ease * 100);
+      preloaderCounter.textContent = (count < 10 ? '0' : '') + count + '%';
+      if (preloaderProgress) preloaderProgress.style.width = count + '%';
+
+      if (t < 1) {
+        requestAnimationFrame(stepPreloader);
+      } else {
+        preloaderCounter.textContent = '100%';
+        if (preloaderProgress) preloaderProgress.style.width = '100%';
+        setTimeout(() => {
+          preloader.classList.add('leaving');
+          setTimeout(() => {
+            if (preloader.parentNode) preloader.remove();
+          }, 850);
+        }, 120);
+      }
+    }
+    requestAnimationFrame(stepPreloader);
+  }
+
+  // ========== CUSTOM LERPED CURSOR (R10 / O3) ==========
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+  const cursorLabel = document.getElementById('cursor-ring-label');
+
+  if (cursorDot && cursorRing && window.matchMedia('(pointer: fine)').matches) {
+    document.documentElement.classList.add('custom-cursor');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('pointermove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+    }, { passive: true });
+
+    function cursorLoop() {
+      ringX += (mouseX - ringX) * 0.2;
+      ringY += (mouseY - ringY) * 0.2;
+      cursorRing.style.transform = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(cursorLoop);
+    }
+    requestAnimationFrame(cursorLoop);
+
+    function bindCursorTriggers() {
+      document.querySelectorAll('[data-cursor]').forEach(el => {
+        el.addEventListener('pointerenter', () => {
+          cursorRing.classList.add('active');
+          if (cursorLabel) cursorLabel.textContent = el.dataset.cursor || 'VIEW';
+        });
+        el.addEventListener('pointerleave', () => {
+          cursorRing.classList.remove('active');
+          if (cursorLabel) cursorLabel.textContent = '';
+        });
+      });
+
+      document.querySelectorAll('a, button, .star-node, .orbit-core, .timeline-nav-item').forEach(el => {
+        if (!el.dataset.cursor) {
+          el.addEventListener('pointerenter', () => {
+            cursorRing.classList.add('active');
+            const text = (el.innerText || el.getAttribute('title') || 'ACTION').trim().slice(0, 8).toUpperCase();
+            if (cursorLabel) cursorLabel.textContent = text || 'TAP';
+          });
+          el.addEventListener('pointerleave', () => {
+            cursorRing.classList.remove('active');
+            if (cursorLabel) cursorLabel.textContent = '';
+          });
+        }
+      });
+    }
+    bindCursorTriggers();
+    window.bindCursorTriggers = bindCursorTriggers;
+  }
+
+  // ========== HERO MAGNETIC AVATAR (R6) ==========
+  const magnetAvatar = document.querySelector('.hero-avatar-magnetic');
+  if (magnetAvatar && window.matchMedia('(pointer: fine)').matches) {
+    let isMagnetActive = false;
+    window.addEventListener('pointermove', (e) => {
+      const r = magnetAvatar.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+      const radius = r.width / 2 + 130;
+
+      if (dist < radius) {
+        magnetAvatar.style.transition = 'transform 0.15s ease-out';
+        magnetAvatar.style.transform = `translate3d(${(dx / 3.6).toFixed(1)}px, ${(dy / 3.6).toFixed(1)}px, 0) scale(1.05)`;
+        isMagnetActive = true;
+      } else if (isMagnetActive) {
+        magnetAvatar.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+        magnetAvatar.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        isMagnetActive = false;
+      }
+    }, { passive: true });
+  }
+
+  // ========== LETTER-BY-LETTER SCROLL ILLUMINATION (R3) ==========
+  const letterRevealEl = document.getElementById('letter-reveal-text');
+  let revealSpans = [];
+  if (letterRevealEl) {
+    const rawText = (letterRevealEl.getAttribute('aria-label') || letterRevealEl.textContent).trim().replace(/\s+/g, ' ');
+    letterRevealEl.textContent = '';
+    const words = rawText.split(' ');
+    words.forEach((word, wIdx) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'reveal-word';
+      [...word].forEach(char => {
+        const charSpan = document.createElement('span');
+        charSpan.className = 'reveal-char';
+        charSpan.textContent = char;
+        charSpan.setAttribute('aria-hidden', 'true');
+        wordSpan.appendChild(charSpan);
+        revealSpans.push(charSpan);
+      });
+      letterRevealEl.appendChild(wordSpan);
+      if (wIdx < words.length - 1) {
+        letterRevealEl.appendChild(document.createTextNode(' '));
+      }
+    });
+  }
+
+  function updateLetterReveal() {
+    if (!letterRevealEl || !revealSpans.length) return;
+    const r = letterRevealEl.getBoundingClientRect();
+    const prog = Math.min(1, Math.max(0, (window.innerHeight * 0.85 - r.top) / (window.innerHeight * 0.55 + r.height)));
+    const N = revealSpans.length;
+    revealSpans.forEach((s, i) => {
+      const charProg = Math.min(1, Math.max(0, prog * N - i));
+      const opacity = 0.70 + 0.30 * charProg;
+      s.style.opacity = opacity.toFixed(3);
+      if (charProg >= 0.7) {
+        s.style.color = '#ffffff';
+        s.style.textShadow = '0 0 16px rgba(255, 215, 120, 0.65), 0 2px 14px rgba(0, 0, 0, 0.95)';
+      } else {
+        s.style.color = 'rgba(255, 255, 255, 0.88)';
+        s.style.textShadow = '0 2px 12px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.9)';
+      }
+    });
+  }
+
   // ========== VIDEO BACKGROUND AUTOPLAY CHECK ==========
   const bgVideo = document.getElementById('bg-video');
   if (bgVideo) {
@@ -139,63 +298,158 @@ document.addEventListener('DOMContentLoaded', () => {
     return map[lang] || 'lang-other';
   }
 
+  // ========== KINETIC DUAL MARQUEE ENGINE (R4 / S01) ==========
+  const row1 = document.getElementById('marquee-row-1');
+  const row2 = document.getElementById('marquee-row-2');
+  const marqueeSection = document.getElementById('marquee-section');
+
+  if (row1 && row2 && typeof TOP_PROJECTS !== 'undefined') {
+    const set1 = TOP_PROJECTS.slice(0, 5);
+    const set2 = TOP_PROJECTS.slice(5, 10);
+    if (typeof ALL_REPOS !== 'undefined') {
+      const extra = ALL_REPOS.filter(r => !TOP_PROJECTS.some(tp => tp.name === r.name)).slice(0, 4);
+      set1.push(...extra.slice(0, 2));
+      set2.push(...extra.slice(2, 4));
+    }
+
+    function createMarqueeCard(item) {
+      const tile = document.createElement('div');
+      tile.className = 'marquee-tile';
+      tile.dataset.cursor = 'INSPECT';
+      const isTop = !!item.rank;
+      tile.innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full ${isTop ? 'bg-amber-400' : 'bg-orange-400'} animate-pulse"></span>
+            <span class="font-mono text-xs font-bold text-amber-300">${isTop ? '#' + item.rank : 'REPO'}</span>
+          </div>
+          <span class="lang-pill text-[11px] py-0.5 px-2">
+            <span class="lang-dot ${getLangClass(item.language)}"></span>
+            ${item.language}
+          </span>
+        </div>
+        <div class="my-1">
+          <h4 class="font-display font-bold text-white text-base truncate">${item.name}</h4>
+          <p class="text-xs text-white/60 line-clamp-2 leading-relaxed mt-1">${item.highlight || item.description}</p>
+        </div>
+        <div class="flex items-center justify-between text-xs text-amber-400/80 font-mono pt-1 border-t border-white/5">
+          <span>${item.tags ? item.tags.slice(0, 2).join(' · ') : 'SYSTEM'}</span>
+          <span>INSPECT ↗</span>
+        </div>
+      `;
+      tile.addEventListener('click', () => {
+        const match = TOP_PROJECTS.find(p => p.name === item.name);
+        if (match) {
+          openProjectModal(match);
+        } else {
+          openGenericRepoModal(item);
+        }
+      });
+      return tile;
+    }
+
+    [...set1, ...set1, ...set1].forEach(item => row1.appendChild(createMarqueeCard(item)));
+    [...set2, ...set2, ...set2].forEach(item => row2.appendChild(createMarqueeCard(item)));
+  }
+
+  function updateMarquee() {
+    if (!marqueeSection || !row1 || !row2) return;
+    const rect = marqueeSection.getBoundingClientRect();
+    const offset = (window.scrollY - (rect.top + window.scrollY) + window.innerHeight) * 0.28;
+    row1.style.transform = `translate3d(${offset - 200}px, 0, 0)`;
+    row2.style.transform = `translate3d(${-(offset - 200)}px, 0, 0)`;
+  }
+
   // ========== RENDER TOP 10 PROJECTS ==========
   const topGrid = document.getElementById('top-projects-grid');
 
-  TOP_PROJECTS.forEach((project, index) => {
-    const card = document.createElement('div');
-    card.className = 'project-card top cursor-pointer group';
-    card.dataset.index = index;
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
+  if (topGrid && typeof TOP_PROJECTS !== 'undefined') {
+    topGrid.innerHTML = '';
+    TOP_PROJECTS.forEach((project, index) => {
+      const card = document.createElement('div');
+      card.className = 'project-card top cursor-pointer group';
+      card.dataset.index = index;
+      card.dataset.cursor = 'INSPECT';
+      card.style.setProperty('--i', index);
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
 
-    card.innerHTML = `
-      <div class="rank-badge">#${project.rank}</div>
-      
-      <div class="flex items-start gap-4 mb-5">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-rose-500/10 flex items-center justify-center text-2xl shrink-0 border border-orange-500/20 shadow-inner group-hover:scale-110 transition-transform">
-          ${getIcon(project.tags)}
+      card.innerHTML = `
+        <div class="rank-badge">#${project.rank}</div>
+        
+        <div class="flex items-start gap-4 mb-5">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-rose-500/10 flex items-center justify-center text-2xl shrink-0 border border-orange-500/20 shadow-inner group-hover:scale-110 transition-transform">
+            ${getIcon(project.tags)}
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-display text-xl sm:text-2xl font-bold mb-1 pr-12 truncate text-white group-hover:text-amber-200 transition-colors">${project.name}</h3>
+            <p class="text-sm text-amber-400 font-semibold tracking-wide">${project.highlight}</p>
+          </div>
         </div>
-        <div class="flex-1 min-w-0">
-          <h3 class="font-display text-xl sm:text-2xl font-bold mb-1 pr-12 truncate text-white group-hover:text-amber-200 transition-colors">${project.name}</h3>
-          <p class="text-sm text-amber-400 font-semibold tracking-wide">${project.highlight}</p>
+
+        <p class="text-white/70 text-sm sm:text-base leading-relaxed mb-6">${project.description}</p>
+
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <span class="lang-pill">
+            <span class="lang-dot ${getLangClass(project.language)}"></span>
+            ${project.language}
+          </span>
+          ${project.stars > 0 ? `<span class="lang-pill text-amber-300">⭐ ${project.stars}</span>` : ''}
+          ${project.forks > 0 ? `<span class="lang-pill text-orange-300">🍴 ${project.forks}</span>` : ''}
+          ${project.tags.map(t => `<span class="lang-pill">${t}</span>`).join('')}
         </div>
-      </div>
 
-      <p class="text-white/70 text-sm sm:text-base leading-relaxed mb-6">${project.description}</p>
+        <div class="flex items-center gap-4 pt-2">
+          <button class="inspect-btn inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl bg-orange-500/15 hover:bg-orange-500/30 border border-orange-500/30 text-amber-300 transition-all shadow-sm">
+            <span>⚡</span> Inspect Architecture
+          </button>
+          <a href="${project.url}" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white/70 hover:text-white transition group-repo-link"
+             onclick="event.stopPropagation()">
+            GitHub
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      `;
 
-      <div class="flex flex-wrap items-center gap-3 mb-6">
-        <span class="lang-pill">
-          <span class="lang-dot ${getLangClass(project.language)}"></span>
-          ${project.language}
-        </span>
-        ${project.stars > 0 ? `<span class="lang-pill text-amber-300">⭐ ${project.stars}</span>` : ''}
-        ${project.forks > 0 ? `<span class="lang-pill text-orange-300">🍴 ${project.forks}</span>` : ''}
-        ${project.tags.map(t => `<span class="lang-pill">${t}</span>`).join('')}
-      </div>
+      card.addEventListener('click', () => {
+        openProjectModal(project);
+      });
 
-      <div class="flex items-center gap-4 pt-2">
-        <button class="inspect-btn inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl bg-orange-500/15 hover:bg-orange-500/30 border border-orange-500/30 text-amber-300 transition-all shadow-sm">
-          <span>🔍</span> Inspect Architecture
-        </button>
-        <a href="${project.url}" target="_blank" rel="noopener"
-           class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white/70 hover:text-white transition group-repo-link"
-           onclick="event.stopPropagation()">
-          GitHub
-          <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
-      </div>
-    `;
-
-    // Click card to open Architecture Deep-Dive modal
-    card.addEventListener('click', (e) => {
-      openProjectModal(project);
+      topGrid.appendChild(card);
     });
+  }
 
-    topGrid.appendChild(card);
-  });
+  function updateStickyStack() {
+    if (window.innerWidth <= 768) return;
+    const cards = document.querySelectorAll('.project-card.top');
+    const N = cards.length;
+    if (!N) return;
+
+    cards.forEach((card, i) => {
+      if (i < N - 1) {
+        const nextCard = cards[i + 1];
+        const nextRect = nextCard.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        if (nextRect.top < cardRect.bottom) {
+          const overlap = Math.max(0, Math.min(1, (cardRect.bottom - nextRect.top) / (cardRect.height || 1)));
+          const targetScale = 1 - (N - 1 - i) * 0.022;
+          const scale = 1 - (1 - targetScale) * overlap;
+          const brightness = 1 - 0.18 * overlap;
+          card.style.transform = `scale(${scale.toFixed(4)})`;
+          card.style.filter = `brightness(${brightness.toFixed(3)})`;
+        } else {
+          card.style.transform = 'scale(1)';
+          card.style.filter = 'brightness(1)';
+        }
+      } else {
+        card.style.transform = 'scale(1)';
+        card.style.filter = 'brightness(1)';
+      }
+    });
+  }
 
   // ========== RENDER ALL REPOS ==========
   const allGrid = document.getElementById('all-repos-grid');
@@ -1485,22 +1739,35 @@ From B.Tech CSE (79.6%) to MBA in Finance &amp; Digital Transformation &amp; Ana
       setActiveTimelineItem(activeId);
     }
 
+    function onMasterScroll(scrollPos) {
+      onScrollSpy(scrollPos);
+      if (typeof updateMarquee === 'function') updateMarquee();
+      if (typeof updateStickyStack === 'function') updateStickyStack();
+      if (typeof updateLetterReveal === 'function') updateLetterReveal();
+    }
+
     if (lenis) {
       lenis.on('scroll', (e) => {
-        onScrollSpy(e.scroll);
+        onMasterScroll(e.scroll);
       });
     } else {
       let isScrollTicking = false;
       window.addEventListener('scroll', () => {
         if (!isScrollTicking) {
           window.requestAnimationFrame(() => {
-            onScrollSpy();
+            onMasterScroll(window.scrollY);
             isScrollTicking = false;
           });
           isScrollTicking = true;
         }
       }, { passive: true });
     }
+
+    // Initial run
+    requestAnimationFrame(() => {
+      onMasterScroll(window.scrollY || 0);
+      if (window.bindCursorTriggers) window.bindCursorTriggers();
+    });
 
     window.addEventListener('resize', () => {
       refreshAllGeometry();

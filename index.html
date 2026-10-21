@@ -9,7 +9,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Kanit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,6 +20,7 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             display: ['Space Grotesk', 'sans-serif'],
+            kanit: ['Kanit', 'sans-serif'],
           },
           colors: {
             primary: '#ff7700',
@@ -38,6 +39,29 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-transparent text-white overflow-x-hidden">
+
+  <!-- Cinematic Custom Cursor (R10 / O3) -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"><span class="cursor-ring-label" id="cursor-ring-label"></span></div>
+
+  <!-- Cinematic Preloader (R9 / O2) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-header">
+      <span class="preloader-status"><span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>SINGULARITY KINETIC RUNTIME v2.6</span>
+      <span>UDAY DOMADIYA</span>
+    </div>
+    <div class="preloader-center">
+      <div class="preloader-counter" id="preloader-counter">00%</div>
+      <div class="preloader-subtitle">INITIALIZING EVENT HORIZON ENGINE</div>
+      <div class="preloader-progress-bar">
+        <div class="preloader-progress-fill" id="preloader-progress"></div>
+      </div>
+    </div>
+    <div class="preloader-footer">
+      <span>AI SYSTEMS • AUTONOMOUS AGENTS</span>
+      <span>SCROLL TO EXPLORE</span>
+    </div>
+  </div>
 
   <!-- Black Hole Simulation Video Background -->
   <div id="bg-video-container">
@@ -237,79 +261,61 @@
     </div>
   </aside>
 
-  <!-- ========== HERO ========== -->
-  <section id="hero" class="min-h-screen flex items-center justify-center relative px-6">
-    <div class="max-w-5xl mx-auto text-center">
-      <!-- Founder Portrait Avatar (Centered, 2x size) -->
-      <div class="flex justify-center mb-6">
-        <div class="relative inline-block">
-          <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-orange-500 to-rose-500 shadow-2xl shadow-orange-500/35 mx-auto">
-            <img src="assets/uday-domadiya.jpg" alt="Uday Domadiya" class="w-full h-full object-cover rounded-full border-4 border-[#090714]" />
-          </div>
-          <span class="absolute bottom-2.5 right-2.5 w-6 h-6 rounded-full bg-emerald-500 border-3 border-[#090714] shadow-md animate-pulse" title="Available for opportunities"></span>
-        </div>
+  <!-- ========== HERO (S01 Monumental Gradient Type + R6 Magnetic Avatar) ========== -->
+  <section id="hero" class="hero-monumental-container relative">
+    
+    <!-- Top Floating Status Badges -->
+    <div class="hero-top-badges">
+      <div class="hero-glass-pill" data-cursor="STATUS">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>OPEN TO OPPORTUNITIES · FOUNDER / AI ENGINEER</span>
       </div>
-
-      <!-- Message Pill Centered Below Photo -->
-      <div class="flex justify-center mb-8">
-        <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-orange-950/70 border border-orange-500/35 text-sm sm:text-base text-amber-200 shadow-sm shadow-orange-500/20">
-          <span class="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse shadow-sm shadow-orange-400"></span>
-          Building the future of AI & autonomous systems
-        </div>
-      </div>
-      
-      <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-6">
-        <span class="block text-white">Uday</span>
-        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-400 to-rose-500">Domadiya</span>
-      </h1>
-      
-      <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
-        AI systems • Autonomous agents • Privacy-first tools • Research frameworks<br>
-        Turning ambitious ideas into production-ready software.
-      </p>
-
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <a href="#top10" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 text-white font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all hover:scale-105">
-          Explore Top Projects
-        </a>
-        <a href="assets/Uday_Domadiya_Resume.pdf" download="Uday_Domadiya_Resume.pdf" target="_blank"
-           class="px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-500/20 to-amber-500/20 hover:from-orange-500/35 hover:to-amber-500/35 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white transition-all font-semibold flex items-center gap-2.5 shadow-sm shadow-orange-500/10 hover:scale-105"
-           title="Download Uday Domadiya's Official Resume">
-          <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
-          <span>Download Resume (PDF)</span>
-        </a>
-        <button id="hero-terminal-btn" class="px-7 py-3.5 rounded-full bg-orange-950/60 hover:bg-orange-500/20 border border-orange-500/40 hover:border-orange-400 text-amber-200 hover:text-white transition font-mono text-sm flex items-center gap-2 shadow-sm">
-          <span>&gt;_</span> Launch Terminal CLI
-        </button>
-        <a href="https://www.linkedin.com/in/udaydomadiya08" target="_blank" rel="noopener"
-           class="px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white transition font-medium flex items-center gap-2">
-          <svg class="w-4 h-4 fill-current text-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-
-      <div class="mt-20 flex items-center justify-center gap-2 text-white/40 text-sm animate-bounce">
-        <span>Scroll to explore</span>
-        <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      <div class="hero-glass-pill" data-cursor="ACADEMICS">
+        <span>🎓 NIRMA UNIVERSITY</span>
+        <span class="text-white/40">|</span>
+        <span class="text-amber-300">CSE + QUANT FINANCE &amp; ANALYTICS</span>
       </div>
     </div>
+
+    <!-- Monumental Stage: Image Above, Name Below with Space -->
+    <div class="monumental-stage">
+      <!-- Magnetic Avatar Above (R6) -->
+      <div class="hero-avatar-container" id="hero-magnet">
+        <div class="hero-avatar-magnetic" data-cursor="UDAY">
+          <img src="assets/uday-domadiya.jpg" alt="Uday Domadiya — AI Systems Builder" />
+          <span class="hero-avatar-status-dot" title="Available for engineering roles"></span>
+        </div>
+      </div>
+
+      <!-- Monumental Name Below with Space -->
+      <div class="monumental-title-wrap">
+        <h1 class="monumental-name">UDAY DOMADIYA</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== KINETIC DUAL MARQUEE (R4 / S01) ========== -->
+  <section class="marquee-section" id="marquee-section" aria-label="Streaming Repositories Marquee">
+    <div class="marquee-row" id="marquee-row-1" data-dir="1"></div>
+    <div class="marquee-row" id="marquee-row-2" data-dir="-1"></div>
   </section>
 
   <!-- ========== STORY / THE JOURNEY ========== -->
   <section id="story" class="py-28 px-6 relative">
     <div class="max-w-5xl mx-auto">
-      <div class="story-panel mb-16 text-center max-w-3xl mx-auto">
-        <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">The Journey</p>
+      <div class="story-panel mb-16 text-center max-w-3xl mx-auto px-4">
+        <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">The Journey &amp; Philosophy</p>
         <h2 class="font-display text-4xl sm:text-5xl font-bold mb-6 leading-tight">
           From curiosity to<br>
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">shipping real systems</span>
         </h2>
-        <p class="text-lg text-white/70 leading-relaxed mb-4">
+        
+        <!-- Letter-by-Letter Scroll Illuminated Manifesto (R3) -->
+        <p class="letter-reveal-text" id="letter-reveal-text" aria-label="I build tools that sit at the intersection of artificial intelligence, privacy, automation, and real-world impact. Every repository is a chapter — some experimental, some production-ready, all driven by the same obsession: make powerful technology accessible, safe, and useful.">
           I build tools that sit at the intersection of artificial intelligence, privacy, automation, and real-world impact. Every repository is a chapter — some experimental, some production-ready, all driven by the same obsession: make powerful technology accessible, safe, and useful.
         </p>
-        <p class="text-sm text-white/50">
+
+        <p class="text-sm text-white/80 max-w-2xl mx-auto mb-4">
           Dual background across Computer Science Engineering and Finance &amp; Digital Transformation &amp; Analytics (Nirma University). Below is a verified track record of my work.
         </p>
 
@@ -653,16 +659,16 @@
     </div>
   </section>
 
-  <!-- ========== TOP 10 ========== -->
+  <!-- ========== TOP 10 PROJECTS ========== -->
   <section id="top10" class="py-24 px-6 relative">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-20">
+      <div class="text-center mb-16">
         <p class="text-sm uppercase tracking-[0.3em] text-amber-400 mb-4 font-semibold">Ranked Showcase</p>
-        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Top 10 Projects</h2>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Top 10 <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">Projects</span></h2>
         <p class="text-white/50 max-w-xl mx-auto">Ordered by impact, originality, technical depth and community signal. Click any card to inspect its system architecture.</p>
       </div>
 
-      <div class="grid gap-8" id="top-projects-grid">
+      <div class="grid gap-8 max-w-5xl mx-auto" id="top-projects-grid">
         <!-- Cards injected by JS -->
       </div>
     </div>
